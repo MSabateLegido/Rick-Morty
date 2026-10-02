@@ -1,4 +1,4 @@
-package com.marc.rickmorty.ui.theme
+package com.marc.rickmorty.core.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
