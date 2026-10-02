@@ -20,13 +20,13 @@ class CharacterViewModel @Inject constructor(
     val uiState = _uiState.asStateFlow()
 
     fun loadCharacters() {
-        _uiState.update {
-            it.copy(
-                isLoading = true,
-                error = null
-            )
-        }
         viewModelScope.launch {
+            _uiState.update {
+                it.copy(
+                    isLoading = true,
+                    error = null
+                )
+            }
             try {
                 val response = getCharactersUseCase()
                 _uiState.update {

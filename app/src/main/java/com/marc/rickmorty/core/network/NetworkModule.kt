@@ -1,5 +1,6 @@
 package com.marc.rickmorty.core.network
 
+import com.marc.rickmorty.features.characters.data.datasource.CharacterApi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -37,5 +38,13 @@ object NetworkModule {
                 )
             )
             .build()
+    }
+
+    @Provides
+    @Singleton
+    fun provideCharacterApi(
+        retrofit: Retrofit
+    ): CharacterApi {
+        return retrofit.create(CharacterApi::class.java)
     }
 }
