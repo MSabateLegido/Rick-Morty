@@ -8,6 +8,6 @@ interface CharacterApi {
 
     @GET("character")
     suspend fun getCharacters(
-        @Query("page") page: Int? = nullel m
+        @Query("page") page: Int? = null
     ): CharacterResponseDto
 }
