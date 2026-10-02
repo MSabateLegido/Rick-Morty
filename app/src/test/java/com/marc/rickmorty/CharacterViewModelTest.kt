@@ -16,6 +16,7 @@ import org.junit.After
 import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
+import kotlin.collections.emptyList
 
 @OptIn(ExperimentalCoroutinesApi::class)
 class CharacterViewModelTest {
@@ -65,5 +66,21 @@ class CharacterViewModelTest {
         assertEquals(characters, viewModel.uiState.value.characters)
         assertEquals(false, viewModel.uiState.value.isLoading)
         assertEquals(null, viewModel.uiState.value.error)
+    }
+
+    @Test
+    fun `loadCharacters set error correctly when failure`() = runTest {
+        val exception = Exception("Something went wrong")
+
+        coEvery {
+            getCharactersUseCase()
+        } throws exception
+
+        viewModel.loadCharacters()
+        advanceUntilIdle()
+
+        assertEquals(emptyList<Character>(), viewModel.uiState.value.characters)
+        assertEquals(false, viewModel.uiState.value.isLoading)
+        assertEquals(exception.message, viewModel.uiState.value.error)
     }
 }
