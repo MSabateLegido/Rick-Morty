@@ -9,11 +9,13 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.material3.Card
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.marc.rickmorty.core.ui.theme.spacing
 import com.marc.rickmorty.features.characters.domain.model.Character
 
 @Composable
@@ -31,8 +33,8 @@ fun CharacterCarousel(
         HorizontalPager(
             state = pagerState,
             modifier = Modifier.fillMaxWidth(),
-            contentPadding = PaddingValues(horizontal = 8.dp),
-            pageSpacing = 4.dp
+            contentPadding = PaddingValues(horizontal = MaterialTheme.spacing.sm),
+            pageSpacing = MaterialTheme.spacing.xs
         ) { page ->
             Box(
                 modifier = Modifier.fillMaxWidth(),
