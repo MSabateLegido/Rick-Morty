@@ -1,11 +1,12 @@
 package com.marc.rickmorty.features.characters.data.network
 
+import android.util.Log
 import kotlinx.coroutines.delay
 import retrofit2.HttpException
 
 
 suspend fun <T> executeRetryAfter(
-    maxTries: Int = 3,
+    maxTries: Int = 10,
     request: suspend () -> T
 ): T {
     var tries = 0
@@ -13,7 +14,7 @@ suspend fun <T> executeRetryAfter(
         try {
             return request()
         } catch (e: HttpException) {
-            if (e.code() != 429 || tries < maxTries) {
+            if (e.code() != 429 || tries > maxTries) {
                 throw e
             }
             val retryAfter = e.response()
