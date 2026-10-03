@@ -34,7 +34,7 @@ fun CharacterCarousel(
             state = carouselState,
             modifier = Modifier
                 .fillMaxWidth()
-                .height(300.dp),
+                .height(360.dp),
             itemSpacing = 8.dp,
             contentPadding = PaddingValues(horizontal = 16.dp)
         ) { index ->
