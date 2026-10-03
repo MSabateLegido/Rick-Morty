@@ -5,9 +5,8 @@ import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.marc.rickmorty.features.characters.data.datasource.CharacterApi
 import com.marc.rickmorty.features.characters.data.model.CharacterDto
-import com.marc.rickmorty.features.characters.data.model.CharacterResponseDto
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
+import com.marc.rickmorty.features.characters.data.network.executeRetryAfter
+import retrofit2.HttpException
 import kotlin.coroutines.cancellation.CancellationException
 
 class CharacterPagingSource(
@@ -21,16 +20,22 @@ class CharacterPagingSource(
         val page = params.key ?: 1
 
         return try {
-            val response = api.getCharacters(page)
+            val response = executeRetryAfter {
+                api.getCharacters(page)
+            }
 
             LoadResult.Page(
                 data = response.results,
                 prevKey = if (page == 1) null else page - 1,
                 nextKey = if (response.info.next == null) null else page + 1
             )
-        } catch (e: CancellationException) {
+        } catch (e: HttpException) {
+            LoadResult.Error(e)
+        }
+        catch (e: CancellationException) {
             throw e
-        } catch (e: Exception) {
+        }
+        catch (e: Exception) {
             LoadResult.Error(e)
         }
     }
