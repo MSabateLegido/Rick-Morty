@@ -25,9 +25,12 @@ class MainActivity : ComponentActivity() {
             RickMortyTheme {
                 val navController = rememberNavController()
 
-                AppNavHost(
-                    navController = navController
-                )
+                Scaffold { innerPadding ->
+                    AppNavHost(
+                        navController = navController,
+                        modifier = Modifier.padding(innerPadding)
+                    )
+                }
             }
         }
     }
