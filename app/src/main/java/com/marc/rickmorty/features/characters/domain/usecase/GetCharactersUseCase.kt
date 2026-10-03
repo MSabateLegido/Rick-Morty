@@ -1,13 +1,15 @@
 package com.marc.rickmorty.features.characters.domain.usecase
 
+import androidx.paging.PagingData
 import com.marc.rickmorty.features.characters.domain.model.Character
 import com.marc.rickmorty.features.characters.domain.repository.CharacterRepository
+import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class GetCharactersUseCase @Inject constructor(
-    val repository: CharacterRepository
+    private val repository: CharacterRepository
 ) {
 
-    suspend operator fun invoke(): List<Character> =
+    operator fun invoke(): Flow<PagingData<Character>> =
         repository.getCharacters()
 }
