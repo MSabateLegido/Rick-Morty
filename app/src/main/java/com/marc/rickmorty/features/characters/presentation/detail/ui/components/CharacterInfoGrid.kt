@@ -1,0 +1,150 @@
+package com.marc.rickmorty.features.characters.presentation.detail.ui.components
+
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.unit.dp
+import com.marc.rickmorty.R
+import com.marc.rickmorty.core.ui.theme.spacing
+import com.marc.rickmorty.features.characters.domain.model.Character
+import com.marc.rickmorty.features.characters.domain.model.Gender
+import com.marc.rickmorty.features.characters.domain.model.Status
+
+
+/*@Composable
+fun CharacterInfoGrid(
+    character: Character
+) {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(16.dp),
+        horizontalArrangement = Arrangement.spacedBy(8.dp)
+    ) {
+        CharacterInfoCard(
+            modifier = Modifier.weight(1f),
+            icon = painterResource(R.drawable.ic_status),
+            label = "Status",
+            value = character.status,
+            containerColor = Color(0xFFEAF8F0),
+            iconColor = Color(0xFF35B86B)
+        )
+
+        CharacterInfoCard(
+            modifier = Modifier.weight(1f),
+            icon = when (character.gender) {
+                Gender.MALE -> painterResource(R.drawable.ic_gender_male)
+                Gender.FEMALE -> painterResource(R.drawable.ic_gender_female)
+                else -> painterResource(R.drawable.ic_gender_unknown)
+            },
+            label = "Gender",
+            value = character.gender.value,
+            containerColor = Color(0xFFF0EEFF),
+            iconColor = Color(0xFF6857E8)
+        )
+
+        CharacterInfoCard(
+            modifier = Modifier.weight(1f),
+            icon = painterResource(R.drawable.ic_species),
+            label = "Species",
+            value = character.species,
+            containerColor = Color(0xFFFFF1EA),
+            iconColor = Color(0xFFFF7043)
+        )
+
+        CharacterInfoCard(
+            modifier = Modifier.weight(1f),
+            icon = painterResource(R.drawable.ic_type),
+            label = "Type",
+            value = character.type.ifBlank { "—" },
+            containerColor = Color(0xFFF4F5FA),
+            iconColor = Color(0xFF7D879C)
+        )
+    }
+}*/
+
+@Composable
+fun CharacterInfoGrid(
+    character: Character
+) {
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(16.dp),
+        verticalArrangement = Arrangement.spacedBy(16.dp)
+    ) {
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.spacedBy(8.dp)
+        ) {
+            CharacterInfoCard(
+                modifier = Modifier.weight(1f),
+                icon = painterResource(R.drawable.ic_status),
+                label = "Status",
+                value = character.status.value,
+                containerColor = when(character.status) {
+                    Status.ALIVE -> Color(0xFFEAF8F0)
+                    Status.DEAD -> Color(0xFFFCEBEC)
+                    Status.UNKNOWN -> Color(0xFFF1F2F5)
+                },
+                iconColor = when(character.status) {
+                    Status.ALIVE -> Color(0xFF35B86B)
+                    Status.DEAD -> Color(0xFFD94A59)
+                    Status.UNKNOWN -> Color(0xFF7D8491)
+                },
+                iconSize = MaterialTheme.spacing.md
+            )
+
+            CharacterInfoCard(
+                modifier = Modifier.weight(1f),
+                icon = when (character.gender) {
+                    Gender.MALE -> painterResource(R.drawable.ic_gender_male)
+                    Gender.FEMALE -> painterResource(R.drawable.ic_gender_female)
+                    Gender.UNKNOWN -> painterResource(R.drawable.ic_gender_unknown)
+                },
+                label = "Gender",
+                value = character.gender.value,
+                containerColor =  when (character.gender) {
+                    Gender.MALE -> Color(0xFFEAF2FF)
+                    Gender.FEMALE -> Color(0xFFF5EEFF)
+                    Gender.UNKNOWN -> Color(0xFFF1F2F5)
+                },
+                iconColor =  when (character.gender) {
+                    Gender.MALE -> Color(0xFF4A82E8)
+                    Gender.FEMALE -> Color(0xFF8A5DE8)
+                    Gender.UNKNOWN -> Color(0xFF7D8491)
+                },
+                iconSize = MaterialTheme.spacing.md
+            )
+
+            CharacterInfoCard(
+                modifier = Modifier.weight(1f),
+                icon = painterResource(R.drawable.ic_species),
+                label = "Species",
+                value = character.species,
+                containerColor = Color(0xFFFFF1EA),
+                iconColor = Color(0xFFFF7043),
+                iconSize = MaterialTheme.spacing.md
+            )
+        }
+
+        if (character.type.isNotEmpty()) {
+            CharacterInfoCard(
+                modifier = Modifier.fillMaxWidth(),
+                icon = painterResource(R.drawable.ic_type),
+                label = "Type",
+                value = character.type,
+                containerColor = Color(0xFFF4F5FA),
+                iconColor = Color(0xFF7D879C),
+                iconSize = MaterialTheme.spacing.lg
+            )
+        }
+    }
+}
