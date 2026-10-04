@@ -9,6 +9,7 @@ import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.paging.LoadState
 import androidx.paging.compose.collectAsLazyPagingItems
+import com.marc.rickmorty.core.ui.components.ErrorScreen
 import com.marc.rickmorty.core.ui.components.LoadingScreen
 import com.marc.rickmorty.core.ui.theme.spacing
 import com.marc.rickmorty.features.characters.presentation.ui.components.CharacterCarousel
@@ -25,15 +26,26 @@ fun CharacterScreen(
         modifier = Modifier.fillMaxSize(),
         contentAlignment = Alignment.Center
     ) {
-        if (characters.loadState.refresh is LoadState.Loading) {
-            LoadingScreen(
-                modifier = Modifier.fillMaxSize(),
-                size = MaterialTheme.spacing.xxl
-            )
-        } else {
-            CharacterCarousel(
-                characters = characters
-            )
+        when (characters.loadState.refresh) {
+            is LoadState.Loading -> {
+                LoadingScreen(
+                    modifier = Modifier.fillMaxSize(),
+                    size = MaterialTheme.spacing.xxl
+                )
+            }
+
+            is LoadState.Error -> {
+                ErrorScreen(
+                    modifier = Modifier.fillMaxSize(),
+                    onRetry = characters::retry
+                )
+            }
+
+            is LoadState.NotLoading -> {
+                CharacterCarousel(
+                    characters = characters
+                )
+            }
         }
     }
 }
