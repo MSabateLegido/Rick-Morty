@@ -1,4 +1,4 @@
-package com.marc.rickmorty.features.characters.data.network
+package com.marc.rickmorty.core.network
 
 import kotlinx.coroutines.delay
 import retrofit2.HttpException

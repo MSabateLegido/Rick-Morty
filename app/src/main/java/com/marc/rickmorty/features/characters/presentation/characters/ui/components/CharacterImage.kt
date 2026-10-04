@@ -32,27 +32,27 @@ fun CharacterImage(
     }
 
     Box(
-        modifier = Modifier.fillMaxSize()
+        modifier = with(sharedTransitionScope) {
+            Modifier
+                .fillMaxSize()
+                .sharedElement(
+                    sharedContentState = rememberSharedContentState(
+                        key = "character-image-${character.id}"
+                    ),
+                    animatedVisibilityScope = animatedVisibilityScope,
+                    boundsTransform = { _, _ ->
+                        tween(
+                            durationMillis = 550,
+                            easing = EaseInOutCubic
+                        )
+                    }
+                )
+        }
     ) {
         AsyncImage(
             model = character.image,
             contentDescription = character.name,
-            modifier = with(sharedTransitionScope) {
-                Modifier
-                    .fillMaxSize()
-                    .sharedElement(
-                        sharedContentState = rememberSharedContentState(
-                            key = "character-image-${character.id}"
-                        ),
-                        animatedVisibilityScope = animatedVisibilityScope,
-                        boundsTransform = { _, _ ->
-                            tween(
-                                durationMillis = 550,
-                                easing = EaseInOutCubic
-                            )
-                        }
-                    )
-            },
+            modifier = Modifier.fillMaxSize(),
             contentScale = ContentScale.Crop,
             onState = { state ->
                 imageState = state

@@ -4,7 +4,7 @@ import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.marc.rickmorty.features.characters.data.datasource.CharacterApi
 import com.marc.rickmorty.features.characters.data.model.CharacterDto
-import com.marc.rickmorty.features.characters.data.network.executeRetryAfter
+import com.marc.rickmorty.core.network.executeRetryAfter
 import retrofit2.HttpException
 import kotlin.coroutines.cancellation.CancellationException
 
