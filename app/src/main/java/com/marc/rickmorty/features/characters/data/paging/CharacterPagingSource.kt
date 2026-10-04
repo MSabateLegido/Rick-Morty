@@ -1,6 +1,5 @@
 package com.marc.rickmorty.features.characters.data.paging
 
-import android.util.Log
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.marc.rickmorty.features.characters.data.datasource.CharacterApi
