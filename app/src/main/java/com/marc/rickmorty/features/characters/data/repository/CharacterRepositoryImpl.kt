@@ -31,4 +31,11 @@ class CharacterRepositoryImpl @Inject constructor(
             }
         }
     }
+
+    override suspend fun getCharacterById(characterId: Int): Character {
+        return characterApi
+            .getCharacterById(characterId)
+            .toDomain()
+
+    }
 }
