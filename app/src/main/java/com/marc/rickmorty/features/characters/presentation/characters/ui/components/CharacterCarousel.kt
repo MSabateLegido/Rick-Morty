@@ -1,4 +1,4 @@
-package com.marc.rickmorty.features.characters.presentation.ui.components
+package com.marc.rickmorty.features.characters.presentation.characters.ui.components
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues

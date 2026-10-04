@@ -5,7 +5,7 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.marc.rickmorty.features.characters.presentation.ui.CharacterScreen
+import com.marc.rickmorty.features.characters.presentation.characters.ui.CharacterScreen
 
 @Composable
 fun AppNavHost(

@@ -7,7 +7,7 @@ import androidx.paging.PagingState
 import androidx.paging.testing.asSnapshot
 import com.marc.rickmorty.features.characters.domain.model.Character
 import com.marc.rickmorty.features.characters.domain.usecase.GetCharactersUseCase
-import com.marc.rickmorty.features.characters.presentation.viewmodel.CharacterViewModel
+import com.marc.rickmorty.features.characters.presentation.characters.viewmodel.CharacterViewModel
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verify

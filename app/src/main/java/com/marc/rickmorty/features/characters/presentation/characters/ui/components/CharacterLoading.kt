@@ -1,4 +1,4 @@
-package com.marc.rickmorty.features.characters.presentation.ui.components
+package com.marc.rickmorty.features.characters.presentation.characters.ui.components
 
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.MaterialTheme

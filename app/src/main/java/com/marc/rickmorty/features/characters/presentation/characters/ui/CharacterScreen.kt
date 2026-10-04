@@ -1,4 +1,4 @@
-package com.marc.rickmorty.features.characters.presentation.ui
+package com.marc.rickmorty.features.characters.presentation.characters.ui
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -12,8 +12,8 @@ import androidx.paging.compose.collectAsLazyPagingItems
 import com.marc.rickmorty.core.ui.components.ErrorScreen
 import com.marc.rickmorty.core.ui.components.LoadingScreen
 import com.marc.rickmorty.core.ui.theme.spacing
-import com.marc.rickmorty.features.characters.presentation.ui.components.CharacterCarousel
-import com.marc.rickmorty.features.characters.presentation.viewmodel.CharacterViewModel
+import com.marc.rickmorty.features.characters.presentation.characters.ui.components.CharacterCarousel
+import com.marc.rickmorty.features.characters.presentation.characters.viewmodel.CharacterViewModel
 
 
 @Composable
