@@ -1,4 +1,4 @@
-package com.marc.rickmorty.features.characters.presentation.detail.ui
+package com.marc.rickmorty.features.characters.presentation.detail.ui.components
 
 import androidx.compose.animation.AnimatedVisibilityScope
 import androidx.compose.animation.SharedTransitionScope
@@ -34,7 +34,7 @@ fun CharacterDetailImage(
             modifier = with(sharedTransitionScope) {
                 Modifier
                     .fillMaxWidth()
-                    .height(300.dp)
+                    .height(250.dp)
                     .sharedElement(
                         sharedContentState = rememberSharedContentState(
                             key = "character-image-${character.id}"
@@ -58,5 +58,8 @@ fun CharacterDetailImage(
 
             CharacterInfo(character)
         }
+
+
+        CharacterInfoGrid(character)
     }
 }

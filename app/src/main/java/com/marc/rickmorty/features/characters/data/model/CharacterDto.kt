@@ -9,5 +9,9 @@ data class CharacterDto(
     val status: String,
     val species: String,
     val type: String,
-    val image: String
+    val gender: String,
+    val origin: CharacterLocationDto,
+    val location: CharacterLocationDto,
+    val image: String,
+    val episode: List<String>
 )
