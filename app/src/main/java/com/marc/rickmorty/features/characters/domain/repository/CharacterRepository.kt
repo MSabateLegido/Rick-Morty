@@ -1,9 +1,11 @@
 package com.marc.rickmorty.features.characters.domain.repository
 
+import androidx.paging.PagingData
 import com.marc.rickmorty.features.characters.domain.model.Character
+import kotlinx.coroutines.flow.Flow
 
 
 interface CharacterRepository {
 
-    suspend fun getCharacters(): List<Character>
+    fun getCharacters(): Flow<PagingData<Character>>
 }

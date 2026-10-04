@@ -2,9 +2,12 @@ package com.marc.rickmorty.features.characters.presentation.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.paging.PagingData
+import androidx.paging.cachedIn
+import com.marc.rickmorty.features.characters.domain.model.Character
 import com.marc.rickmorty.features.characters.domain.usecase.GetCharactersUseCase
-import com.marc.rickmorty.features.characters.presentation.ui.CharacterUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
@@ -13,36 +16,11 @@ import javax.inject.Inject
 
 @HiltViewModel
 class CharacterViewModel @Inject constructor(
-    private val getCharactersUseCase: GetCharactersUseCase
+    getCharactersUseCase: GetCharactersUseCase
 ) : ViewModel() {
 
-    private val _uiState = MutableStateFlow(CharacterUiState())
-    val uiState = _uiState.asStateFlow()
+    val characters: Flow<PagingData<Character>> =
+        getCharactersUseCase()
+            .cachedIn(viewModelScope)
 
-    fun loadCharacters() {
-        viewModelScope.launch {
-            _uiState.update {
-                it.copy(
-                    isLoading = true,
-                    error = null
-                )
-            }
-            try {
-                val response = getCharactersUseCase()
-                _uiState.update {
-                    it.copy(
-                        isLoading = false,
-                        characters = response
-                    )
-                }
-            } catch (e: Exception) {
-                _uiState.update {
-                    it.copy(
-                        isLoading = false,
-                        error = e.message
-                    )
-                }
-            }
-        }
-    }
 }
