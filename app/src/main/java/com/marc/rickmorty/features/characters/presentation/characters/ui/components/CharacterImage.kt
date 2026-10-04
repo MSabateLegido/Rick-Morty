@@ -1,5 +1,10 @@
-package com.marc.rickmorty.features.characters.presentation.ui.components
+package com.marc.rickmorty.features.characters.presentation.characters.ui.components
 
+import androidx.compose.animation.AnimatedVisibilityScope
+import androidx.compose.animation.ExperimentalSharedTransitionApi
+import androidx.compose.animation.SharedTransitionScope
+import androidx.compose.animation.core.EaseInOutCubic
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
@@ -13,9 +18,12 @@ import coil.compose.AsyncImage
 import coil.compose.AsyncImagePainter
 import com.marc.rickmorty.features.characters.domain.model.Character
 
+@OptIn(ExperimentalSharedTransitionApi::class)
 @Composable
 fun CharacterImage(
-    character: Character
+    character: Character,
+    sharedTransitionScope: SharedTransitionScope,
+    animatedVisibilityScope: AnimatedVisibilityScope
 ) {
     var imageState by remember {
         mutableStateOf<AsyncImagePainter.State>(
@@ -24,7 +32,22 @@ fun CharacterImage(
     }
 
     Box(
-        modifier = Modifier.fillMaxSize()
+        modifier = with(sharedTransitionScope) {
+            Modifier
+                .fillMaxSize()
+                .sharedElement(
+                    sharedContentState = rememberSharedContentState(
+                        key = "character-image-${character.id}"
+                    ),
+                    animatedVisibilityScope = animatedVisibilityScope,
+                    boundsTransform = { _, _ ->
+                        tween(
+                            durationMillis = 550,
+                            easing = EaseInOutCubic
+                        )
+                    }
+                )
+        }
     ) {
         AsyncImage(
             model = character.image,

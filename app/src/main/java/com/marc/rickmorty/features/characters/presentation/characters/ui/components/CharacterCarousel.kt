@@ -1,5 +1,8 @@
-package com.marc.rickmorty.features.characters.presentation.ui.components
+package com.marc.rickmorty.features.characters.presentation.characters.ui.components
 
+import androidx.compose.animation.AnimatedVisibilityScope
+import androidx.compose.animation.ExperimentalSharedTransitionApi
+import androidx.compose.animation.SharedTransitionScope
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -15,10 +18,13 @@ import androidx.compose.ui.unit.dp
 import androidx.paging.compose.LazyPagingItems
 import com.marc.rickmorty.features.characters.domain.model.Character
 
-@OptIn(ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalMaterial3Api::class, ExperimentalSharedTransitionApi::class)
 @Composable
 fun CharacterCarousel(
-    characters: LazyPagingItems<Character>
+    characters: LazyPagingItems<Character>,
+    onCharacterClick: (Character) -> Unit,
+    sharedTransitionScope: SharedTransitionScope,
+    animatedVisibilityScope: AnimatedVisibilityScope
 ) {
     val carouselState = rememberCarouselState {
         characters.itemCount
@@ -41,7 +47,12 @@ fun CharacterCarousel(
                     character = character,
                     modifier = Modifier.maskClip(
                         shape = MaterialTheme.shapes.large
-                    )
+                    ),
+                    onClick = {
+                        onCharacterClick(character)
+                    },
+                    sharedTransitionScope = sharedTransitionScope,
+                    animatedVisibilityScope = animatedVisibilityScope
                 )
             }
         }
