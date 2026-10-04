@@ -10,6 +10,10 @@ fun CharacterDto.toDomain(): Character {
         status = status,
         species = species,
         type = type,
-        image = image
+        gender = gender,
+        origin = origin.toDomain(),
+        location = location.toDomain(),
+        image = image,
+        episode = episode
     )
 }
