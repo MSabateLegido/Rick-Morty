@@ -9,6 +9,7 @@ import com.marc.rickmorty.features.characters.data.mapper.toDomain
 import com.marc.rickmorty.core.network.executeRetryAfter
 import com.marc.rickmorty.features.characters.data.paging.CharacterPagingSource
 import com.marc.rickmorty.features.characters.domain.model.Character
+import com.marc.rickmorty.features.characters.domain.model.CharacterFilters
 import com.marc.rickmorty.features.characters.domain.repository.CharacterRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
@@ -18,13 +19,18 @@ class CharacterRepositoryImpl @Inject constructor(
     private val characterApi: CharacterApi
 ) : CharacterRepository {
 
-    override fun getCharacters(): Flow<PagingData<Character>> {
+    override fun getCharacters(
+        filters: CharacterFilters
+    ): Flow<PagingData<Character>> {
         return Pager(
             config = PagingConfig(
                 pageSize = 20
             ),
             pagingSourceFactory = {
-                CharacterPagingSource(characterApi)
+                CharacterPagingSource(
+                    api = characterApi,
+                    filters = filters
+                )
             }
         ).flow.map { pagingData ->
             pagingData.map { characterDto ->

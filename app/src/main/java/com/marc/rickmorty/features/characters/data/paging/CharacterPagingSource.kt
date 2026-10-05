@@ -5,11 +5,13 @@ import androidx.paging.PagingState
 import com.marc.rickmorty.features.characters.data.datasource.CharacterApi
 import com.marc.rickmorty.features.characters.data.model.CharacterDto
 import com.marc.rickmorty.core.network.executeRetryAfter
+import com.marc.rickmorty.features.characters.domain.model.CharacterFilters
 import retrofit2.HttpException
 import kotlin.coroutines.cancellation.CancellationException
 
 class CharacterPagingSource(
-    private val api: CharacterApi
+    private val api: CharacterApi,
+    private val filters: CharacterFilters
 ) : PagingSource<Int, CharacterDto>() {
 
     override suspend fun load(
@@ -20,7 +22,14 @@ class CharacterPagingSource(
 
         return try {
             val response = executeRetryAfter {
-                api.getCharacters(page)
+                api.getCharacters(
+                    page = page,
+                    name = filters.name,
+                    status = filters.status?.value,
+                    gender = filters.gender?.value,
+                    species = filters.species,
+                    type = filters.type
+                )
             }
 
             LoadResult.Page(
