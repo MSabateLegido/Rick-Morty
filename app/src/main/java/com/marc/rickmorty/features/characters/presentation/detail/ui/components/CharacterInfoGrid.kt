@@ -107,6 +107,7 @@ fun CharacterInfoGrid(
                 icon = when (character.gender) {
                     Gender.MALE -> painterResource(R.drawable.ic_gender_male)
                     Gender.FEMALE -> painterResource(R.drawable.ic_gender_female)
+                    Gender.GENDERLESS -> painterResource(R.drawable.ic_gender_unknown)
                     Gender.UNKNOWN -> painterResource(R.drawable.ic_gender_unknown)
                 },
                 label = "Gender",
@@ -114,11 +115,13 @@ fun CharacterInfoGrid(
                 containerColor =  when (character.gender) {
                     Gender.MALE -> Color(0xFFEAF2FF)
                     Gender.FEMALE -> Color(0xFFF5EEFF)
+                    Gender.GENDERLESS -> Color(0xFFE8F8F7)
                     Gender.UNKNOWN -> Color(0xFFF1F2F5)
                 },
                 iconColor =  when (character.gender) {
                     Gender.MALE -> Color(0xFF4A82E8)
                     Gender.FEMALE -> Color(0xFF8A5DE8)
+                    Gender.GENDERLESS -> Color(0xFF35A9A0)
                     Gender.UNKNOWN -> Color(0xFF7D8491)
                 },
                 iconSize = MaterialTheme.spacing.md
