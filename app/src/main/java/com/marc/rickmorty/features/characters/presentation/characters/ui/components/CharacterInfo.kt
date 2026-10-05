@@ -16,6 +16,7 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import com.marc.rickmorty.core.ui.theme.Outfit
 import com.marc.rickmorty.core.ui.theme.spacing
 import com.marc.rickmorty.features.characters.domain.model.Character
 
@@ -49,7 +50,8 @@ fun BoxScope.CharacterInfo(
             text = character.name,
             style = MaterialTheme.typography.headlineSmall,
             fontWeight = FontWeight.Bold,
-            color = Color.White
+            color = Color.White,
+            fontFamily = Outfit
         )
 
         Text(
