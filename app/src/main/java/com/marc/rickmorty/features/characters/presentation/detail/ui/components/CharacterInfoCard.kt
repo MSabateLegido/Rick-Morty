@@ -22,6 +22,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.VIEW_MODEL_STORE_OWNER_KEY
+import com.marc.rickmorty.core.ui.theme.Outfit
 import com.marc.rickmorty.core.ui.theme.spacing
 
 
@@ -56,8 +57,9 @@ fun CharacterInfoCard(
         ) {
             Text(
                 text = label,
-                style = MaterialTheme.typography.labelSmall,
-                color = Color(0xFF6F7890)
+                style = MaterialTheme.typography.labelMedium,
+                color = Color(0xFF6F7890),
+                fontFamily = Outfit
             )
 
             Text(

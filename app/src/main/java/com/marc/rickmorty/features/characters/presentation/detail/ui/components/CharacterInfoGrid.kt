@@ -99,7 +99,7 @@ fun CharacterInfoGrid(
                     Status.DEAD -> Color(0xFFD94A59)
                     Status.UNKNOWN -> Color(0xFF7D8491)
                 },
-                iconSize = MaterialTheme.spacing.md
+                iconSize = MaterialTheme.spacing.lg
             )
 
             CharacterInfoCard(
@@ -121,17 +121,7 @@ fun CharacterInfoGrid(
                     Gender.FEMALE -> Color(0xFF8A5DE8)
                     Gender.UNKNOWN -> Color(0xFF7D8491)
                 },
-                iconSize = MaterialTheme.spacing.md
-            )
-
-            CharacterInfoCard(
-                modifier = Modifier.weight(1f),
-                icon = painterResource(R.drawable.ic_species),
-                label = "Species",
-                value = character.species,
-                containerColor = Color(0xFFFFF1EA),
-                iconColor = Color(0xFFFF7043),
-                iconSize = MaterialTheme.spacing.md
+                iconSize = MaterialTheme.spacing.lg
             )
         }
 
