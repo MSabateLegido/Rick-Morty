@@ -17,6 +17,7 @@ data class Character(
 enum class Gender(val value: String) {
     MALE("Male"),
     FEMALE("Female"),
+    GENDERLESS("Genderless"),
     UNKNOWN("Unknown")
 }
 

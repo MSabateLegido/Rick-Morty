@@ -19,6 +19,7 @@ fun CharacterDto.toDomain(): Character {
         gender = when (gender) {
             "Male" -> Gender.MALE
             "Female" -> Gender.FEMALE
+            "Genderless" -> Gender.GENDERLESS
             else -> Gender.UNKNOWN
         },
         origin = origin.toDomain(),
