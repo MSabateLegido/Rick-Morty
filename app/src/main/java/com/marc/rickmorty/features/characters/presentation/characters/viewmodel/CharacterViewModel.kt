@@ -60,8 +60,17 @@ class CharacterViewModel @Inject constructor(
     fun applyFilters() {
         _uiState.update {
             it.copy(
-                appliedFilters = it.editingFilters,
-                filtersVisible = false
+                filtersVisible = false,
+                appliedFilters = it.editingFilters
+            )
+        }
+    }
+
+    fun resetFilters() {
+        _uiState.update {
+            it.copy(
+                filtersVisible = false,
+                appliedFilters = CharacterFilters()
             )
         }
     }

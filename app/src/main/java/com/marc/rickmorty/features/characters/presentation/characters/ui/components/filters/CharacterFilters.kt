@@ -2,6 +2,7 @@ package com.marc.rickmorty.features.characters.presentation.characters.ui.compon
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -12,6 +13,8 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.marc.rickmorty.core.ui.theme.Outfit
 import com.marc.rickmorty.core.ui.theme.spacing
@@ -23,18 +26,23 @@ import com.marc.rickmorty.features.characters.domain.model.Status
 @Composable
 fun CharacterFilters(
     filters: CharacterFilters,
+    filtersApplied: Boolean,
     onFiltersChange: (CharacterFilters) -> Unit,
-    onApply: () -> Unit
+    onApply: () -> Unit,
+    onReset: () -> Unit
 ) {
     Surface(
         modifier = Modifier
             .fillMaxWidth()
             .padding(MaterialTheme.spacing.lg),
         shape = RoundedCornerShape(24.dp),
-        color = MaterialTheme.colorScheme.surfaceVariant
+        color = Color(0xFFF1F1F6)
     ) {
         Column(
-            modifier = Modifier.padding(MaterialTheme.spacing.lg),
+            modifier = Modifier.padding(
+                horizontal = MaterialTheme.spacing.lg,
+                vertical = MaterialTheme.spacing.md
+            ),
             verticalArrangement = Arrangement.spacedBy(MaterialTheme.spacing.md)
         ) {
 
@@ -66,7 +74,6 @@ fun CharacterFilters(
                 }
             )
 
-
             CharacterFilterTextField(
                 modifier = Modifier.fillMaxWidth(),
                 label = "Type",
@@ -93,9 +100,9 @@ fun CharacterFilters(
                     selected = filters.status,
                     options = listOf(
                         null to "All",
-                        Status.ALIVE to "Alive",
-                        Status.DEAD to "Dead",
-                        Status.UNKNOWN to "Unknown"
+                        Status.ALIVE to Status.ALIVE.value,
+                        Status.DEAD to Status.DEAD.value,
+                        Status.UNKNOWN to Status.UNKNOWN.value
                     ),
                     onSelected = {
                         onFiltersChange(
@@ -110,9 +117,10 @@ fun CharacterFilters(
                     selected = filters.gender,
                     options = listOf(
                         null to "All",
-                        Gender.MALE to "Male",
-                        Gender.FEMALE to "Female",
-                        Gender.UNKNOWN to "Unknown"
+                        Gender.MALE to Gender.MALE.value,
+                        Gender.FEMALE to Gender.FEMALE.value,
+                        Gender.GENDERLESS to Gender.GENDERLESS.value,
+                        Gender.UNKNOWN to Gender.UNKNOWN.value
                     ),
                     onSelected = {
                         onFiltersChange(
@@ -124,14 +132,41 @@ fun CharacterFilters(
 
             Row(
                 modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.End
+                horizontalArrangement = if (filtersApplied )
+                    Arrangement.SpaceEvenly
+                else
+                    Arrangement.End,
+
             ) {
+                if (filtersApplied) {
+                    Button(
+                        onClick = onReset,
+                        shape = RoundedCornerShape(20.dp),
+                        contentPadding = PaddingValues(
+                            horizontal = 24.dp,
+                            vertical = 10.dp
+                        )
+                    ) {
+                        Text(
+                            text = "Reset filters",
+                            fontFamily = Outfit,
+                            fontWeight = FontWeight.SemiBold
+                        )
+                    }
+                }
+
                 Button(
-                    onClick = onApply
+                    onClick = onApply,
+                    shape = RoundedCornerShape(20.dp),
+                    contentPadding = PaddingValues(
+                        horizontal = 24.dp,
+                        vertical = 10.dp
+                    )
                 ) {
                     Text(
                         text = "Apply filters",
-                        fontFamily = Outfit
+                        fontFamily = Outfit,
+                        fontWeight = FontWeight.SemiBold
                     )
                 }
             }

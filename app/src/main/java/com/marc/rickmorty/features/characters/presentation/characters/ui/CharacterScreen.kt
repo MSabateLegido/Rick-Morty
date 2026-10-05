@@ -23,6 +23,7 @@ import com.marc.rickmorty.core.ui.components.ErrorScreen
 import com.marc.rickmorty.core.ui.components.LoadingScreen
 import com.marc.rickmorty.core.ui.theme.spacing
 import com.marc.rickmorty.features.characters.domain.model.Character
+import com.marc.rickmorty.features.characters.domain.model.CharacterFilters
 import com.marc.rickmorty.features.characters.presentation.characters.ui.components.CharacterCarousel
 import com.marc.rickmorty.features.characters.presentation.characters.ui.components.CharacterTopAppBar
 import com.marc.rickmorty.features.characters.presentation.characters.ui.components.filters.CharacterFilters
@@ -58,8 +59,10 @@ fun CharacterScreen(
             ) {
                 CharacterFilters(
                     filters = uiState.editingFilters,
+                    filtersApplied = uiState.appliedFilters.hasActiveFilters,
                     onFiltersChange = viewModel::updateEditingFilters,
-                    onApply = viewModel::applyFilters
+                    onApply = viewModel::applyFilters,
+                    onReset = viewModel::resetFilters
                 )
             }
 

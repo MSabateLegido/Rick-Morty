@@ -6,4 +6,7 @@ data class CharacterFilters(
     val gender: Gender? = null,
     val species: String? = null,
     val type: String? = null
-)
+) {
+    val hasActiveFilters: Boolean
+        get() = this != CharacterFilters()
+}
