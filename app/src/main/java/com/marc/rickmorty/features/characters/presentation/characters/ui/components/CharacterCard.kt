@@ -28,10 +28,7 @@ fun CharacterCard(
             .fillMaxWidth()
             .fillMaxHeight()
             .clickable(onClick = onClick),
-        shape = MaterialTheme.shapes.large,
-        elevation = CardDefaults.cardElevation(
-            defaultElevation = 0.dp
-        )
+        shape = MaterialTheme.shapes.large
     ) {
         CharacterImage(
             character = character,

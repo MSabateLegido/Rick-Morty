@@ -16,6 +16,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.paging.compose.LazyPagingItems
+import com.marc.rickmorty.core.ui.theme.spacing
 import com.marc.rickmorty.features.characters.domain.model.Character
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalSharedTransitionApi::class)
@@ -39,8 +40,8 @@ fun CharacterCarousel(
             modifier = Modifier
                 .fillMaxWidth()
                 .height(360.dp),
-            itemSpacing = 8.dp,
-            contentPadding = PaddingValues(horizontal = 16.dp)
+            itemSpacing = MaterialTheme.spacing.sm,
+            contentPadding = PaddingValues(horizontal = MaterialTheme.spacing.md)
         ) { index ->
             characters[index]?.let { character ->
                 CharacterCard(

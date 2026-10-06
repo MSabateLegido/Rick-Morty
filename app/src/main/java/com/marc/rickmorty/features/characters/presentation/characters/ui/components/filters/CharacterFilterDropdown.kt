@@ -1,8 +1,6 @@
 package com.marc.rickmorty.features.characters.presentation.characters.ui.components.filters
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -12,28 +10,25 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExposedDropdownMenuAnchorType
 import androidx.compose.material3.ExposedDropdownMenuBox
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.marc.rickmorty.R
 import com.marc.rickmorty.core.ui.theme.Outfit
@@ -81,14 +76,14 @@ fun <T> CharacterFilterDropdown(
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(56.dp)
-                    .clip(RoundedCornerShape(16.dp))
-                    .background(Color(0xFFFAFAFC))
+                    .height(MaterialTheme.spacing.xxl)
+                    .clip(RoundedCornerShape(MaterialTheme.spacing.md))
+                    .background(colorResource(R.color.character_dropdown_container_color))
                     .menuAnchor(
                         type = ExposedDropdownMenuAnchorType.PrimaryNotEditable,
                         enabled = true
                     )
-                    .padding(horizontal = 16.dp),
+                    .padding(horizontal = MaterialTheme.spacing.md),
                 contentAlignment = Alignment.CenterStart
 
             ) {
@@ -112,7 +107,7 @@ fun <T> CharacterFilterDropdown(
                         },
                         contentDescription = null,
                         tint = MaterialTheme.colorScheme.onSurface,
-                        modifier = Modifier.size(22.dp)
+                        modifier = Modifier.size(MaterialTheme.spacing.md)
                     )
                 }
             }
@@ -123,7 +118,7 @@ fun <T> CharacterFilterDropdown(
                     expanded = false
                 },
                 modifier = Modifier
-                    .background(Color(0xFFFAFAFC))
+                    .background(colorResource(R.color.character_dropdown_container_color))
             ) {
                 options.forEach { (value, text) ->
 
@@ -145,7 +140,7 @@ fun <T> CharacterFilterDropdown(
                             expanded = false
                         },
                         contentPadding = PaddingValues(
-                            horizontal = 16.dp
+                            horizontal = MaterialTheme.spacing.md
                         )
                     )
                 }

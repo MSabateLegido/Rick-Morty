@@ -9,66 +9,15 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.unit.dp
+import androidx.compose.ui.res.stringResource
 import com.marc.rickmorty.R
 import com.marc.rickmorty.core.ui.theme.spacing
 import com.marc.rickmorty.features.characters.domain.model.Character
 import com.marc.rickmorty.features.characters.domain.model.Gender
 import com.marc.rickmorty.features.characters.domain.model.Status
 
-
-/*@Composable
-fun CharacterInfoGrid(
-    character: Character
-) {
-    Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(16.dp),
-        horizontalArrangement = Arrangement.spacedBy(8.dp)
-    ) {
-        CharacterInfoCard(
-            modifier = Modifier.weight(1f),
-            icon = painterResource(R.drawable.ic_status),
-            label = "Status",
-            value = character.status,
-            containerColor = Color(0xFFEAF8F0),
-            iconColor = Color(0xFF35B86B)
-        )
-
-        CharacterInfoCard(
-            modifier = Modifier.weight(1f),
-            icon = when (character.gender) {
-                Gender.MALE -> painterResource(R.drawable.ic_gender_male)
-                Gender.FEMALE -> painterResource(R.drawable.ic_gender_female)
-                else -> painterResource(R.drawable.ic_gender_unknown)
-            },
-            label = "Gender",
-            value = character.gender.value,
-            containerColor = Color(0xFFF0EEFF),
-            iconColor = Color(0xFF6857E8)
-        )
-
-        CharacterInfoCard(
-            modifier = Modifier.weight(1f),
-            icon = painterResource(R.drawable.ic_species),
-            label = "Species",
-            value = character.species,
-            containerColor = Color(0xFFFFF1EA),
-            iconColor = Color(0xFFFF7043)
-        )
-
-        CharacterInfoCard(
-            modifier = Modifier.weight(1f),
-            icon = painterResource(R.drawable.ic_type),
-            label = "Type",
-            value = character.type.ifBlank { "—" },
-            containerColor = Color(0xFFF4F5FA),
-            iconColor = Color(0xFF7D879C)
-        )
-    }
-}*/
 
 @Composable
 fun CharacterInfoGrid(
@@ -77,27 +26,27 @@ fun CharacterInfoGrid(
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(16.dp),
-        verticalArrangement = Arrangement.spacedBy(16.dp)
+            .padding(MaterialTheme.spacing.md),
+        verticalArrangement = Arrangement.spacedBy(MaterialTheme.spacing.md)
     ) {
         Row(
             modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.spacedBy(8.dp)
+            horizontalArrangement = Arrangement.spacedBy(MaterialTheme.spacing.sm)
         ) {
             CharacterInfoCard(
                 modifier = Modifier.weight(1f),
                 icon = painterResource(R.drawable.ic_status),
-                label = "Status",
+                label = stringResource(R.string.character_status_label),
                 value = character.status.value,
                 containerColor = when(character.status) {
-                    Status.ALIVE -> Color(0xFFEAF8F0)
-                    Status.DEAD -> Color(0xFFFCEBEC)
-                    Status.UNKNOWN -> Color(0xFFF1F2F5)
+                    Status.ALIVE -> colorResource((R.color.character_info_alive_container_color))
+                    Status.DEAD -> colorResource((R.color.character_info_dead_container_color))
+                    Status.UNKNOWN -> colorResource((R.color.character_info_unknown_status_container_color))
                 },
                 iconColor = when(character.status) {
-                    Status.ALIVE -> Color(0xFF35B86B)
-                    Status.DEAD -> Color(0xFFD94A59)
-                    Status.UNKNOWN -> Color(0xFF7D8491)
+                    Status.ALIVE -> colorResource((R.color.character_info_alive_icon_color))
+                    Status.DEAD -> colorResource((R.color.character_info_dead_icon_color))
+                    Status.UNKNOWN -> colorResource((R.color.character_info_unknown_status_icon_color))
                 },
                 iconSize = MaterialTheme.spacing.lg
             )
@@ -110,19 +59,19 @@ fun CharacterInfoGrid(
                     Gender.GENDERLESS -> painterResource(R.drawable.ic_gender_unknown)
                     Gender.UNKNOWN -> painterResource(R.drawable.ic_gender_unknown)
                 },
-                label = "Gender",
+                label = stringResource(R.string.character_gender_label),
                 value = character.gender.value,
                 containerColor =  when (character.gender) {
-                    Gender.MALE -> Color(0xFFEAF2FF)
-                    Gender.FEMALE -> Color(0xFFF5EEFF)
-                    Gender.GENDERLESS -> Color(0xFFE8F8F7)
-                    Gender.UNKNOWN -> Color(0xFFF1F2F5)
+                    Gender.MALE -> colorResource((R.color.character_info_male_container_color))
+                    Gender.FEMALE -> colorResource((R.color.character_info_female_container_color))
+                    Gender.GENDERLESS -> colorResource((R.color.character_info_genderless_container_color))
+                    Gender.UNKNOWN -> colorResource((R.color.character_info_unknown_gender_container_color))
                 },
                 iconColor =  when (character.gender) {
-                    Gender.MALE -> Color(0xFF4A82E8)
-                    Gender.FEMALE -> Color(0xFF8A5DE8)
-                    Gender.GENDERLESS -> Color(0xFF35A9A0)
-                    Gender.UNKNOWN -> Color(0xFF7D8491)
+                    Gender.MALE -> colorResource((R.color.character_info_male_icon_color))
+                    Gender.FEMALE -> colorResource((R.color.character_info_female_icon_color))
+                    Gender.GENDERLESS -> colorResource((R.color.character_info_genderless_icon_color))
+                    Gender.UNKNOWN -> colorResource((R.color.character_info_unknown_gender_icon_color))
                 },
                 iconSize = MaterialTheme.spacing.lg
             )
@@ -132,10 +81,10 @@ fun CharacterInfoGrid(
             CharacterInfoCard(
                 modifier = Modifier.fillMaxWidth(),
                 icon = painterResource(R.drawable.ic_type),
-                label = "Type",
+                label = stringResource(R.string.character_type_label),
                 value = character.type,
-                containerColor = Color(0xFFF4F5FA),
-                iconColor = Color(0xFF7D879C),
+                containerColor = colorResource((R.color.character_info_type_container_color)),
+                iconColor = colorResource((R.color.character_info_type_icon_color)),
                 iconSize = MaterialTheme.spacing.lg
             )
         }

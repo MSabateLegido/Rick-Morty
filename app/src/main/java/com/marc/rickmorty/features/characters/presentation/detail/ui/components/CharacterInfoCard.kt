@@ -1,10 +1,8 @@
 package com.marc.rickmorty.features.characters.presentation.detail.ui.components
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -17,11 +15,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
-import androidx.compose.ui.unit.dp
-import androidx.lifecycle.VIEW_MODEL_STORE_OWNER_KEY
+import com.marc.rickmorty.R
 import com.marc.rickmorty.core.ui.theme.Outfit
 import com.marc.rickmorty.core.ui.theme.spacing
 
@@ -38,9 +36,9 @@ fun CharacterInfoCard(
 ) {
     Row(
         modifier = modifier
-            .clip(RoundedCornerShape(16.dp))
+            .clip(RoundedCornerShape(MaterialTheme.spacing.md))
             .background(containerColor)
-            .padding(8.dp),
+            .padding(MaterialTheme.spacing.sm),
         verticalAlignment = Alignment.CenterVertically
     ) {
         Icon(
@@ -58,7 +56,7 @@ fun CharacterInfoCard(
             Text(
                 text = label,
                 style = MaterialTheme.typography.labelMedium,
-                color = Color(0xFF6F7890),
+                color = colorResource(R.color.character_info_title_text_color),
                 fontFamily = Outfit
             )
 
@@ -66,7 +64,7 @@ fun CharacterInfoCard(
                 text = value,
                 style = MaterialTheme.typography.titleSmall,
                 fontWeight = FontWeight.SemiBold,
-                color = Color(0xFF16213A),
+                color = colorResource(R.color.character_info_value_text_color),
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis
             )
