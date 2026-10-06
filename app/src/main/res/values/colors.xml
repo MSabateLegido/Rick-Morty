@@ -7,5 +7,13 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
     <color name="splash_background">#F2F8F3</color>
+
+    <color name="character_dropdown_container_color">#FFFAFAFC</color>
+    <color name="character_text_field_container_color">#FFFAFAFC</color>
+    <color name="character_filters_container_color">#FFF1F1F6</color>
+    <color name="character_info_title_text_color">#FF6F7890</color>
+    <color name="character_info_value_text_color">#FF16213A</color>
+
 </resources>

@@ -14,6 +14,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import com.marc.rickmorty.R
@@ -37,7 +38,7 @@ fun CharacterFilters(
             .fillMaxWidth()
             .padding(MaterialTheme.spacing.lg),
         shape = RoundedCornerShape(MaterialTheme.spacing.lg),
-        color = Color(0xFFF1F1F6)
+        color = colorResource(R.color.character_filters_container_color)
     ) {
         Column(
             modifier = Modifier.padding(

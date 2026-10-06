@@ -14,8 +14,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
+import com.marc.rickmorty.R
 import com.marc.rickmorty.core.ui.theme.Outfit
 import com.marc.rickmorty.core.ui.theme.spacing
 
@@ -64,9 +66,9 @@ fun CharacterFilterTextField(
             singleLine = true,
             shape = RoundedCornerShape(MaterialTheme.spacing.md),
             colors = TextFieldDefaults.colors(
-                focusedContainerColor = Color(0xFFFAFAFC),
-                unfocusedContainerColor = Color(0xFFFAFAFC),
-                disabledContainerColor = Color(0xFFFAFAFC),
+                focusedContainerColor = colorResource(R.color.character_text_field_container_color),
+                unfocusedContainerColor = colorResource(R.color.character_text_field_container_color),
+                disabledContainerColor = colorResource(R.color.character_text_field_container_color),
 
                 focusedIndicatorColor = Color.Transparent,
                 unfocusedIndicatorColor = Color.Transparent,
