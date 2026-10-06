@@ -4,10 +4,8 @@ import com.marc.rickmorty.features.characters.data.network.executeRetryAfter
 import io.mockk.every
 import io.mockk.mockk
 import junit.framework.TestCase.assertEquals
-import junit.framework.TestCase.assertTrue
 import junit.framework.TestCase.fail
 import kotlinx.coroutines.test.runTest
-import org.junit.Assert.assertThrows
 import org.junit.Test
 import retrofit2.HttpException
 import retrofit2.Response

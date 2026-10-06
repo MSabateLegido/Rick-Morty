@@ -4,9 +4,9 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.map
+import com.marc.rickmorty.core.network.executeRetryAfter
 import com.marc.rickmorty.features.characters.data.datasource.CharacterApi
 import com.marc.rickmorty.features.characters.data.mapper.toDomain
-import com.marc.rickmorty.core.network.executeRetryAfter
 import com.marc.rickmorty.features.characters.data.paging.CharacterPagingSource
 import com.marc.rickmorty.features.characters.domain.model.Character
 import com.marc.rickmorty.features.characters.domain.model.CharacterFilters
