@@ -1,5 +1,6 @@
 package com.marc.rickmorty.features.characters.data.paging
 
+import android.util.Log
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.marc.rickmorty.features.characters.data.datasource.CharacterApi
@@ -38,12 +39,18 @@ class CharacterPagingSource(
                 nextKey = if (response.info.next == null) null else page + 1
             )
         } catch (e: HttpException) {
-            LoadResult.Error(e)
-        }
-        catch (e: CancellationException) {
+            if (e.code() == 404) {
+                LoadResult.Page(
+                    data = emptyList(),
+                    prevKey = null,
+                    nextKey = null
+                )
+            } else {
+                LoadResult.Error(e)
+            }
+        } catch (e: CancellationException) {
             throw e
-        }
-        catch (e: Exception) {
+        } catch (e: Exception) {
             LoadResult.Error(e)
         }
     }

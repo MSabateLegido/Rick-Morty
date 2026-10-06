@@ -21,6 +21,7 @@ import androidx.paging.LoadState
 import androidx.paging.compose.collectAsLazyPagingItems
 import com.marc.rickmorty.core.ui.components.ErrorScreen
 import com.marc.rickmorty.core.ui.components.LoadingScreen
+import com.marc.rickmorty.core.ui.components.NoResultsScreen
 import com.marc.rickmorty.core.ui.theme.spacing
 import com.marc.rickmorty.features.characters.domain.model.Character
 import com.marc.rickmorty.features.characters.domain.model.CharacterFilters
@@ -44,6 +45,7 @@ fun CharacterScreen(
     Scaffold(
         topBar = {
             CharacterTopAppBar(
+                filtersApplied = uiState.appliedFilters.hasActiveFilters,
                 onFiltersClick = viewModel::toggleFilters
             )
         }
@@ -88,12 +90,20 @@ fun CharacterScreen(
                     }
 
                     is LoadState.NotLoading -> {
-                        CharacterCarousel(
-                            characters = characters,
-                            onCharacterClick = onCharacterClick,
-                            sharedTransitionScope = sharedTransitionScope,
-                            animatedVisibilityScope = animatedVisibilityScope
-                        )
+                        if (characters.itemCount == 0 &&
+                            uiState.appliedFilters.hasActiveFilters) {
+                            NoResultsScreen(
+                                modifier = Modifier.fillMaxSize(),
+                                onReset = viewModel::resetFilters
+                            )
+                        } else {
+                            CharacterCarousel(
+                                characters = characters,
+                                onCharacterClick = onCharacterClick,
+                                sharedTransitionScope = sharedTransitionScope,
+                                animatedVisibilityScope = animatedVisibilityScope
+                            )
+                        }
                     }
                 }
             }
