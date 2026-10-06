@@ -10,65 +10,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.unit.dp
 import com.marc.rickmorty.R
 import com.marc.rickmorty.core.ui.theme.spacing
 import com.marc.rickmorty.features.characters.domain.model.Character
 import com.marc.rickmorty.features.characters.domain.model.Gender
 import com.marc.rickmorty.features.characters.domain.model.Status
 
-
-/*@Composable
-fun CharacterInfoGrid(
-    character: Character
-) {
-    Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(16.dp),
-        horizontalArrangement = Arrangement.spacedBy(8.dp)
-    ) {
-        CharacterInfoCard(
-            modifier = Modifier.weight(1f),
-            icon = painterResource(R.drawable.ic_status),
-            label = "Status",
-            value = character.status,
-            containerColor = Color(0xFFEAF8F0),
-            iconColor = Color(0xFF35B86B)
-        )
-
-        CharacterInfoCard(
-            modifier = Modifier.weight(1f),
-            icon = when (character.gender) {
-                Gender.MALE -> painterResource(R.drawable.ic_gender_male)
-                Gender.FEMALE -> painterResource(R.drawable.ic_gender_female)
-                else -> painterResource(R.drawable.ic_gender_unknown)
-            },
-            label = "Gender",
-            value = character.gender.value,
-            containerColor = Color(0xFFF0EEFF),
-            iconColor = Color(0xFF6857E8)
-        )
-
-        CharacterInfoCard(
-            modifier = Modifier.weight(1f),
-            icon = painterResource(R.drawable.ic_species),
-            label = "Species",
-            value = character.species,
-            containerColor = Color(0xFFFFF1EA),
-            iconColor = Color(0xFFFF7043)
-        )
-
-        CharacterInfoCard(
-            modifier = Modifier.weight(1f),
-            icon = painterResource(R.drawable.ic_type),
-            label = "Type",
-            value = character.type.ifBlank { "—" },
-            containerColor = Color(0xFFF4F5FA),
-            iconColor = Color(0xFF7D879C)
-        )
-    }
-}*/
 
 @Composable
 fun CharacterInfoGrid(
@@ -77,12 +24,12 @@ fun CharacterInfoGrid(
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(16.dp),
-        verticalArrangement = Arrangement.spacedBy(16.dp)
+            .padding(MaterialTheme.spacing.md),
+        verticalArrangement = Arrangement.spacedBy(MaterialTheme.spacing.md)
     ) {
         Row(
             modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.spacedBy(8.dp)
+            horizontalArrangement = Arrangement.spacedBy(MaterialTheme.spacing.sm)
         ) {
             CharacterInfoCard(
                 modifier = Modifier.weight(1f),

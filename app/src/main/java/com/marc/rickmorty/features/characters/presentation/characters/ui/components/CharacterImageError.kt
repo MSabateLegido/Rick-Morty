@@ -26,7 +26,7 @@ fun CharacterImageError() {
             contentDescription = null,
             modifier = Modifier
                 .fillMaxSize()
-                .padding(MaterialTheme.spacing.xxl),
+                .padding(MaterialTheme.spacing.huge),
             tint = MaterialTheme.colorScheme.onSurfaceVariant
         )
     }

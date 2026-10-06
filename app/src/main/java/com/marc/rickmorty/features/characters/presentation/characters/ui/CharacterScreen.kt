@@ -77,7 +77,7 @@ fun CharacterScreen(
                     is LoadState.Loading -> {
                         LoadingScreen(
                             modifier = Modifier.fillMaxSize(),
-                            size = MaterialTheme.spacing.xxl
+                            size = MaterialTheme.spacing.huge
                         )
                     }
 

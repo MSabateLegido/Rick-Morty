@@ -28,7 +28,6 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.marc.rickmorty.R
 import com.marc.rickmorty.core.ui.theme.Outfit
@@ -76,14 +75,14 @@ fun <T> CharacterFilterDropdown(
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(56.dp)
-                    .clip(RoundedCornerShape(16.dp))
+                    .height(MaterialTheme.spacing.xxl)
+                    .clip(RoundedCornerShape(MaterialTheme.spacing.md))
                     .background(Color(0xFFFAFAFC))
                     .menuAnchor(
                         type = ExposedDropdownMenuAnchorType.PrimaryNotEditable,
                         enabled = true
                     )
-                    .padding(horizontal = 16.dp),
+                    .padding(horizontal = MaterialTheme.spacing.md),
                 contentAlignment = Alignment.CenterStart
 
             ) {
@@ -107,7 +106,7 @@ fun <T> CharacterFilterDropdown(
                         },
                         contentDescription = null,
                         tint = MaterialTheme.colorScheme.onSurface,
-                        modifier = Modifier.size(22.dp)
+                        modifier = Modifier.size(MaterialTheme.spacing.md)
                     )
                 }
             }
@@ -140,7 +139,7 @@ fun <T> CharacterFilterDropdown(
                             expanded = false
                         },
                         contentPadding = PaddingValues(
-                            horizontal = 16.dp
+                            horizontal = MaterialTheme.spacing.md
                         )
                     )
                 }

@@ -15,7 +15,8 @@ data class AppSpacing(
     val md: Dp = 16.dp,
     val lg: Dp = 24.dp,
     val xl: Dp = 32.dp,
-    val xxl: Dp = 64.dp
+    val xxl: Dp = 56.dp,
+    val huge: Dp = 64.dp
 )
 
 val MaterialTheme.spacing: AppSpacing

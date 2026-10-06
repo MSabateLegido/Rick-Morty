@@ -18,8 +18,8 @@ import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
-import androidx.compose.ui.unit.dp
 import com.marc.rickmorty.core.ui.theme.Outfit
+import com.marc.rickmorty.core.ui.theme.spacing
 
 
 @Composable
@@ -34,9 +34,9 @@ fun CharacterInfoCard(
 ) {
     Row(
         modifier = modifier
-            .clip(RoundedCornerShape(16.dp))
+            .clip(RoundedCornerShape(MaterialTheme.spacing.md))
             .background(containerColor)
-            .padding(8.dp),
+            .padding(MaterialTheme.spacing.sm),
         verticalAlignment = Alignment.CenterVertically
     ) {
         Icon(

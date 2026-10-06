@@ -37,7 +37,7 @@ fun CharacterDetailScreen(
             LoadingScreen(
                 modifier = Modifier
                     .fillMaxSize(),
-                size = MaterialTheme.spacing.xxl
+                size = MaterialTheme.spacing.huge
             )
         }
 

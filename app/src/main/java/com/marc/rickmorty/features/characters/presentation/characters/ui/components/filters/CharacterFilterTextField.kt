@@ -15,7 +15,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.marc.rickmorty.core.ui.theme.Outfit
 import com.marc.rickmorty.core.ui.theme.spacing
@@ -50,7 +49,7 @@ fun CharacterFilterTextField(
             onValueChange = onValueChange,
             modifier = Modifier
                 .fillMaxWidth()
-                .height(56.dp),
+                .height(MaterialTheme.spacing.xxl),
             placeholder = {
                 Text(
                     text = placeholder,
@@ -63,7 +62,7 @@ fun CharacterFilterTextField(
                 fontSize = 16.sp
             ),
             singleLine = true,
-            shape = RoundedCornerShape(16.dp),
+            shape = RoundedCornerShape(MaterialTheme.spacing.md),
             colors = TextFieldDefaults.colors(
                 focusedContainerColor = Color(0xFFFAFAFC),
                 unfocusedContainerColor = Color(0xFFFAFAFC),

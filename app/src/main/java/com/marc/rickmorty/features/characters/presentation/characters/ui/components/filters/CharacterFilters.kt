@@ -15,7 +15,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.dp
 import com.marc.rickmorty.core.ui.theme.Outfit
 import com.marc.rickmorty.core.ui.theme.spacing
 import com.marc.rickmorty.features.characters.domain.model.CharacterFilters
@@ -35,7 +34,7 @@ fun CharacterFilters(
         modifier = Modifier
             .fillMaxWidth()
             .padding(MaterialTheme.spacing.lg),
-        shape = RoundedCornerShape(24.dp),
+        shape = RoundedCornerShape(MaterialTheme.spacing.lg),
         color = Color(0xFFF1F1F6)
     ) {
         Column(
@@ -141,10 +140,10 @@ fun CharacterFilters(
                 if (filtersApplied) {
                     Button(
                         onClick = onReset,
-                        shape = RoundedCornerShape(20.dp),
+                        shape = RoundedCornerShape(MaterialTheme.spacing.lg),
                         contentPadding = PaddingValues(
-                            horizontal = 24.dp,
-                            vertical = 10.dp
+                            horizontal = MaterialTheme.spacing.lg,
+                            vertical = MaterialTheme.spacing.sm
                         )
                     ) {
                         Text(
@@ -157,10 +156,10 @@ fun CharacterFilters(
 
                 Button(
                     onClick = onApply,
-                    shape = RoundedCornerShape(20.dp),
+                    shape = RoundedCornerShape(MaterialTheme.spacing.lg),
                     contentPadding = PaddingValues(
-                        horizontal = 24.dp,
-                        vertical = 10.dp
+                        horizontal = MaterialTheme.spacing.lg,
+                        vertical = MaterialTheme.spacing.sm
                     )
                 ) {
                     Text(

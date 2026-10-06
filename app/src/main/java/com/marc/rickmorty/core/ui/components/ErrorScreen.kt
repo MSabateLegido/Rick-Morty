@@ -16,7 +16,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.unit.dp
 import com.marc.rickmorty.R
 import com.marc.rickmorty.core.ui.theme.spacing
 
@@ -33,7 +32,7 @@ fun ErrorScreen(
         Icon(
             painter = painterResource(R.drawable.ic_cloud_off),
             contentDescription = null,
-            modifier = Modifier.size(64.dp),
+            modifier = Modifier.size(MaterialTheme.spacing.huge),
             tint = MaterialTheme.colorScheme.onSurfaceVariant
         )
 
