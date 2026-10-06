@@ -19,6 +19,7 @@ import com.marc.rickmorty.core.ui.theme.spacing
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CharacterTopAppBar(
+    filtersApplied: Boolean,
     onFiltersClick: () -> Unit
 ) {
     TopAppBar(
@@ -36,7 +37,11 @@ fun CharacterTopAppBar(
                 shape = RoundedCornerShape(MaterialTheme.spacing.md)
             ) {
                 Icon(
-                    painter = painterResource(R.drawable.ic_filter_clear),
+                    painter =
+                        if (filtersApplied)
+                            painterResource(R.drawable.ic_filter_applied)
+                        else
+                            painterResource(R.drawable.ic_filter_clear),
                     contentDescription = "Filters"
                 )
             }
