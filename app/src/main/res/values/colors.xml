@@ -16,4 +16,26 @@
     <color name="character_info_title_text_color">#FF6F7890</color>
     <color name="character_info_value_text_color">#FF16213A</color>
 
+    <color name="character_info_alive_container_color">#FFEAF8F0</color>
+    <color name="character_info_dead_container_color">#FFFCEBEC</color>
+    <color name="character_info_unknown_status_container_color">#FFF1F2F5</color>
+
+    <color name="character_info_alive_icon_color">#FF35B86B</color>
+    <color name="character_info_dead_icon_color">#FFD94A59</color>
+    <color name="character_info_unknown_status_icon_color">#FF7D8491</color>
+
+    <color name="character_info_male_container_color">#FFEAF2FF</color>
+    <color name="character_info_female_container_color">#FFF5EEFF</color>
+    <color name="character_info_genderless_container_color">#FFE8F8F7</color>
+    <color name="character_info_unknown_gender_container_color">#FFF1F2F5</color>
+
+    <color name="character_info_male_icon_color">#FF4A82E8</color>
+    <color name="character_info_female_icon_color">#FF8A5DE8</color>
+    <color name="character_info_genderless_icon_color">#FF35A9A0</color>
+    <color name="character_info_unknown_gender_icon_color">#FF7D8491</color>
+
+    <color name="character_info_type_container_color">#FFF4F5FA</color>
+    <color name="character_info_type_icon_color">#FF7D879C</color>
+
+
 </resources>

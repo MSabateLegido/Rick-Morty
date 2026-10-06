@@ -9,6 +9,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import com.marc.rickmorty.R
@@ -38,14 +39,14 @@ fun CharacterInfoGrid(
                 label = stringResource(R.string.character_status_label),
                 value = character.status.value,
                 containerColor = when(character.status) {
-                    Status.ALIVE -> Color(0xFFEAF8F0)
-                    Status.DEAD -> Color(0xFFFCEBEC)
-                    Status.UNKNOWN -> Color(0xFFF1F2F5)
+                    Status.ALIVE -> colorResource((R.color.character_info_alive_container_color))
+                    Status.DEAD -> colorResource((R.color.character_info_dead_container_color))
+                    Status.UNKNOWN -> colorResource((R.color.character_info_unknown_status_container_color))
                 },
                 iconColor = when(character.status) {
-                    Status.ALIVE -> Color(0xFF35B86B)
-                    Status.DEAD -> Color(0xFFD94A59)
-                    Status.UNKNOWN -> Color(0xFF7D8491)
+                    Status.ALIVE -> colorResource((R.color.character_info_alive_icon_color))
+                    Status.DEAD -> colorResource((R.color.character_info_dead_icon_color))
+                    Status.UNKNOWN -> colorResource((R.color.character_info_unknown_status_icon_color))
                 },
                 iconSize = MaterialTheme.spacing.lg
             )
@@ -61,16 +62,16 @@ fun CharacterInfoGrid(
                 label = stringResource(R.string.character_gender_label),
                 value = character.gender.value,
                 containerColor =  when (character.gender) {
-                    Gender.MALE -> Color(0xFFEAF2FF)
-                    Gender.FEMALE -> Color(0xFFF5EEFF)
-                    Gender.GENDERLESS -> Color(0xFFE8F8F7)
-                    Gender.UNKNOWN -> Color(0xFFF1F2F5)
+                    Gender.MALE -> colorResource((R.color.character_info_male_container_color))
+                    Gender.FEMALE -> colorResource((R.color.character_info_female_container_color))
+                    Gender.GENDERLESS -> colorResource((R.color.character_info_genderless_container_color))
+                    Gender.UNKNOWN -> colorResource((R.color.character_info_unknown_gender_container_color))
                 },
                 iconColor =  when (character.gender) {
-                    Gender.MALE -> Color(0xFF4A82E8)
-                    Gender.FEMALE -> Color(0xFF8A5DE8)
-                    Gender.GENDERLESS -> Color(0xFF35A9A0)
-                    Gender.UNKNOWN -> Color(0xFF7D8491)
+                    Gender.MALE -> colorResource((R.color.character_info_male_icon_color))
+                    Gender.FEMALE -> colorResource((R.color.character_info_female_icon_color))
+                    Gender.GENDERLESS -> colorResource((R.color.character_info_genderless_icon_color))
+                    Gender.UNKNOWN -> colorResource((R.color.character_info_unknown_gender_icon_color))
                 },
                 iconSize = MaterialTheme.spacing.lg
             )
@@ -82,8 +83,8 @@ fun CharacterInfoGrid(
                 icon = painterResource(R.drawable.ic_type),
                 label = stringResource(R.string.character_type_label),
                 value = character.type,
-                containerColor = Color(0xFFF4F5FA),
-                iconColor = Color(0xFF7D879C),
+                containerColor = colorResource((R.color.character_info_type_container_color)),
+                iconColor = colorResource((R.color.character_info_type_icon_color)),
                 iconSize = MaterialTheme.spacing.lg
             )
         }
