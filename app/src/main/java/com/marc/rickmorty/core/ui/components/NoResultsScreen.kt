@@ -15,6 +15,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import com.marc.rickmorty.R
 import com.marc.rickmorty.core.ui.theme.spacing
@@ -39,7 +40,7 @@ fun NoResultsScreen(
         Spacer(modifier = Modifier.height(MaterialTheme.spacing.lg))
 
         Text(
-            text = "No results",
+            text = stringResource(R.string.no_results_screen_title),
             style = MaterialTheme.typography.headlineSmall,
             textAlign = TextAlign.Center
         )
@@ -47,7 +48,7 @@ fun NoResultsScreen(
         Spacer(modifier = Modifier.height(MaterialTheme.spacing.sm))
 
         Text(
-            text = "No characters match the filters you applied.",
+            text = stringResource(R.string.no_results_screen_description),
             style = MaterialTheme.typography.bodyMedium,
             color = MaterialTheme.colorScheme.onSurfaceVariant,
             textAlign = TextAlign.Center
@@ -65,7 +66,7 @@ fun NoResultsScreen(
 
             Spacer(modifier = Modifier.width(MaterialTheme.spacing.sm))
 
-            Text("Reset filters")
+            Text(stringResource(R.string.character_filter_screen_reset_filters_button))
         }
     }
 }

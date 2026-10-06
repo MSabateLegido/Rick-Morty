@@ -14,7 +14,9 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
+import com.marc.rickmorty.R
 import com.marc.rickmorty.core.ui.theme.Outfit
 import com.marc.rickmorty.core.ui.theme.spacing
 import com.marc.rickmorty.features.characters.domain.model.CharacterFilters
@@ -47,9 +49,9 @@ fun CharacterFilters(
 
             CharacterFilterTextField(
                 modifier = Modifier.fillMaxWidth(),
-                label = "Name",
+                label = stringResource(R.string.character_filters_name_label),
                 value = filters.name.orEmpty(),
-                placeholder = "Rick, Morty...",
+                placeholder = stringResource(R.string.character_filters_name_placeholder),
                 onValueChange = {
                     onFiltersChange(
                         filters.copy(
@@ -61,9 +63,9 @@ fun CharacterFilters(
 
             CharacterFilterTextField(
                 modifier = Modifier.fillMaxWidth(),
-                label = "Species",
+                label = stringResource(R.string.character_filters_species_label),
                 value = filters.species.orEmpty(),
-                placeholder = "Human, Alien...",
+                placeholder = stringResource(R.string.character_filters_species_placeholder),
                 onValueChange = {
                     onFiltersChange(
                         filters.copy(
@@ -75,9 +77,9 @@ fun CharacterFilters(
 
             CharacterFilterTextField(
                 modifier = Modifier.fillMaxWidth(),
-                label = "Type",
+                label = stringResource(R.string.character_type_label),
                 value = filters.type.orEmpty(),
-                placeholder = "Clone, Robot...",
+                placeholder = stringResource(R.string.character_filters_type_placeholder),
                 onValueChange = {
                     onFiltersChange(
                         filters.copy(
@@ -95,10 +97,10 @@ fun CharacterFilters(
             ) {
                 CharacterFilterDropdown(
                     modifier = Modifier.weight(1f),
-                    label = "Status",
+                    label = stringResource(R.string.character_status_label),
                     selected = filters.status,
                     options = listOf(
-                        null to "All",
+                        null to stringResource(R.string.character_filters_dropdown_all_tag),
                         Status.ALIVE to Status.ALIVE.value,
                         Status.DEAD to Status.DEAD.value,
                         Status.UNKNOWN to Status.UNKNOWN.value
@@ -112,10 +114,10 @@ fun CharacterFilters(
 
                 CharacterFilterDropdown(
                     modifier = Modifier.weight(1f),
-                    label = "Gender",
+                    label = stringResource(R.string.character_gender_label),
                     selected = filters.gender,
                     options = listOf(
-                        null to "All",
+                        null to stringResource(R.string.character_filters_dropdown_all_tag),
                         Gender.MALE to Gender.MALE.value,
                         Gender.FEMALE to Gender.FEMALE.value,
                         Gender.GENDERLESS to Gender.GENDERLESS.value,
@@ -147,7 +149,7 @@ fun CharacterFilters(
                         )
                     ) {
                         Text(
-                            text = "Reset filters",
+                            text = stringResource(R.string.character_filter_screen_reset_filters_button),
                             fontFamily = Outfit,
                             fontWeight = FontWeight.SemiBold
                         )
@@ -163,7 +165,7 @@ fun CharacterFilters(
                     )
                 ) {
                     Text(
-                        text = "Apply filters",
+                        text = stringResource(R.string.character_filter_screen_apply_filters_button),
                         fontFamily = Outfit,
                         fontWeight = FontWeight.SemiBold
                     )

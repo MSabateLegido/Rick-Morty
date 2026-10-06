@@ -9,6 +9,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 import com.marc.rickmorty.R
@@ -25,7 +26,7 @@ fun CharacterTopAppBar(
     TopAppBar(
         title = {
             Text(
-                text = "Rick & Morty",
+                text = stringResource(R.string.character_top_app_bar_title),
                 fontFamily = Outfit,
                 fontWeight = FontWeight.Bold,
                 fontSize = 40.sp
@@ -42,7 +43,7 @@ fun CharacterTopAppBar(
                             painterResource(R.drawable.ic_filter_applied)
                         else
                             painterResource(R.drawable.ic_filter_clear),
-                    contentDescription = "Filters"
+                    contentDescription = stringResource(R.string.character_top_app_bar_filters_content_description)
                 )
             }
         }

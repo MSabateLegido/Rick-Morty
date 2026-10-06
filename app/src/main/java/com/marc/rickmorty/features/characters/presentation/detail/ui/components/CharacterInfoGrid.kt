@@ -10,6 +10,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import com.marc.rickmorty.R
 import com.marc.rickmorty.core.ui.theme.spacing
 import com.marc.rickmorty.features.characters.domain.model.Character
@@ -34,7 +35,7 @@ fun CharacterInfoGrid(
             CharacterInfoCard(
                 modifier = Modifier.weight(1f),
                 icon = painterResource(R.drawable.ic_status),
-                label = "Status",
+                label = stringResource(R.string.character_status_label),
                 value = character.status.value,
                 containerColor = when(character.status) {
                     Status.ALIVE -> Color(0xFFEAF8F0)
@@ -57,7 +58,7 @@ fun CharacterInfoGrid(
                     Gender.GENDERLESS -> painterResource(R.drawable.ic_gender_unknown)
                     Gender.UNKNOWN -> painterResource(R.drawable.ic_gender_unknown)
                 },
-                label = "Gender",
+                label = stringResource(R.string.character_gender_label),
                 value = character.gender.value,
                 containerColor =  when (character.gender) {
                     Gender.MALE -> Color(0xFFEAF2FF)
@@ -79,7 +80,7 @@ fun CharacterInfoGrid(
             CharacterInfoCard(
                 modifier = Modifier.fillMaxWidth(),
                 icon = painterResource(R.drawable.ic_type),
-                label = "Type",
+                label = stringResource(R.string.character_type_label),
                 value = character.type,
                 containerColor = Color(0xFFF4F5FA),
                 iconColor = Color(0xFF7D879C),
