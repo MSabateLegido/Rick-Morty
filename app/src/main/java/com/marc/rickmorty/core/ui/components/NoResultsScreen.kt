@@ -31,7 +31,7 @@ fun NoResultsScreen(
         verticalArrangement = Arrangement.Center
     ) {
         Icon(
-            painter = painterResource(R.drawable.ic_filter_clear),
+            painter = painterResource(R.drawable.ic_no_results),
             contentDescription = null,
             modifier = Modifier.size(MaterialTheme.spacing.huge),
             tint = MaterialTheme.colorScheme.onSurfaceVariant
@@ -60,7 +60,7 @@ fun NoResultsScreen(
             onClick = onReset
         ) {
             Icon(
-                painter = painterResource(R.drawable.ic_filter_clear),
+                painter = painterResource(R.drawable.ic_reset_filters),
                 contentDescription = null
             )
 

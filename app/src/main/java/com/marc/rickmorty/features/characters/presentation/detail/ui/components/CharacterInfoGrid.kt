@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -35,7 +34,11 @@ fun CharacterInfoGrid(
         ) {
             CharacterInfoCard(
                 modifier = Modifier.weight(1f),
-                icon = painterResource(R.drawable.ic_status),
+                icon = when(character.status) {
+                    Status.ALIVE -> painterResource(R.drawable.ic_status_alive)
+                    Status.DEAD -> painterResource(R.drawable.ic_status_dead)
+                    Status.UNKNOWN -> painterResource(R.drawable.ic_unknown)
+                },
                 label = stringResource(R.string.character_status_label),
                 value = character.status.value,
                 containerColor = when(character.status) {
@@ -56,8 +59,8 @@ fun CharacterInfoGrid(
                 icon = when (character.gender) {
                     Gender.MALE -> painterResource(R.drawable.ic_gender_male)
                     Gender.FEMALE -> painterResource(R.drawable.ic_gender_female)
-                    Gender.GENDERLESS -> painterResource(R.drawable.ic_gender_unknown)
-                    Gender.UNKNOWN -> painterResource(R.drawable.ic_gender_unknown)
+                    Gender.GENDERLESS -> painterResource(R.drawable.ic_gender_genderless)
+                    Gender.UNKNOWN -> painterResource(R.drawable.ic_unknown)
                 },
                 label = stringResource(R.string.character_gender_label),
                 value = character.gender.value,
