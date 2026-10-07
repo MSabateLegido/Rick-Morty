@@ -2,76 +2,70 @@ package com.marc.rickmorty.character
 
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
+import androidx.paging.PagingData
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import androidx.paging.testing.asSnapshot
 import com.marc.rickmorty.features.characters.domain.model.Character
+import com.marc.rickmorty.features.characters.domain.model.CharacterFilters
+import com.marc.rickmorty.features.characters.domain.model.CharacterLocation
+import com.marc.rickmorty.features.characters.domain.model.Gender
+import com.marc.rickmorty.features.characters.domain.model.Status
 import com.marc.rickmorty.features.characters.domain.usecase.GetCharactersUseCase
-import com.marc.rickmorty.features.characters.presentation.viewmodel.CharacterViewModel
+import com.marc.rickmorty.features.characters.presentation.characters.viewmodel.CharacterViewModel
 import io.mockk.every
 import io.mockk.mockk
 import io.mockk.verify
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.test.runTest
 import org.junit.Assert
 import org.junit.Test
 
+@OptIn(ExperimentalCoroutinesApi::class)
 class CharacterViewModelTest {
 
     private val getCharactersUseCase: GetCharactersUseCase = mockk()
 
     @Test
-    fun `characters emits characters from use case`() = runTest {
-        val characters = listOf(
-            Character(
-                id = 1,
-                name = "Rick Sanchez",
-                status = "",
-                species = "",
-                type = "",
-                image = ""
-            ),
-            Character(
-                id = 2,
-                name = "Morty Smith",
-                status = "",
-                species = "",
-                type = "",
-                image = ""
-            )
-        )
+    fun `characters loads with default filters`() = runTest {
+        val pagingData = PagingData.empty<Character>()
 
         every {
-            getCharactersUseCase()
-        } returns Pager(
-            config = PagingConfig(pageSize = 2),
-            pagingSourceFactory = {
-                object : PagingSource<Int, Character>() {
-
-                    override suspend fun load(
-                        params: LoadParams<Int>
-                    ): LoadResult<Int, Character> {
-                        return PagingSource.LoadResult.Page(
-                            data = characters,
-                            prevKey = null,
-                            nextKey = null
-                        )
-                    }
-
-                    override fun getRefreshKey(
-                        state: PagingState<Int, Character>
-                    ): Int? = null
-                }
-            }
-        ).flow
+            getCharactersUseCase(CharacterFilters())
+        } returns flowOf(pagingData)
 
         val viewModel = CharacterViewModel(getCharactersUseCase)
 
-        val result = viewModel.characters.asSnapshot()
-
-        Assert.assertEquals(characters, result)
+        viewModel.characters.first()
 
         verify(exactly = 1) {
-            getCharactersUseCase()
+            getCharactersUseCase(CharacterFilters())
+        }
+    }
+
+    @Test
+    fun `applying filters reloads characters`() = runTest {
+        every {
+            getCharactersUseCase(any())
+        } returns flowOf(PagingData.empty())
+
+        val viewModel = CharacterViewModel(getCharactersUseCase)
+
+        viewModel.characters.first()
+
+        val filters = CharacterFilters(
+            // els camps que tinguis
+        )
+
+        viewModel.updateEditingFilters(filters)
+        viewModel.applyFilters()
+
+        viewModel.characters.first()
+
+        verify {
+            getCharactersUseCase(filters)
         }
     }
 }

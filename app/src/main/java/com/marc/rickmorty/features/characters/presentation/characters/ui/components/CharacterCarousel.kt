@@ -1,0 +1,61 @@
+package com.marc.rickmorty.features.characters.presentation.characters.ui.components
+
+import androidx.compose.animation.AnimatedVisibilityScope
+import androidx.compose.animation.ExperimentalSharedTransitionApi
+import androidx.compose.animation.SharedTransitionScope
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.carousel.HorizontalCenteredHeroCarousel
+import androidx.compose.material3.carousel.rememberCarouselState
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
+import androidx.paging.compose.LazyPagingItems
+import com.marc.rickmorty.core.ui.theme.spacing
+import com.marc.rickmorty.features.characters.domain.model.Character
+
+@OptIn(ExperimentalMaterial3Api::class, ExperimentalSharedTransitionApi::class)
+@Composable
+fun CharacterCarousel(
+    characters: LazyPagingItems<Character>,
+    onCharacterClick: (Character) -> Unit,
+    sharedTransitionScope: SharedTransitionScope,
+    animatedVisibilityScope: AnimatedVisibilityScope
+) {
+    val carouselState = rememberCarouselState {
+        characters.itemCount
+    }
+
+    Box(
+        modifier = Modifier.fillMaxWidth(),
+        contentAlignment = Alignment.Center
+    ) {
+        HorizontalCenteredHeroCarousel(
+            state = carouselState,
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(360.dp),
+            itemSpacing = MaterialTheme.spacing.sm,
+            contentPadding = PaddingValues(horizontal = MaterialTheme.spacing.md)
+        ) { index ->
+            characters[index]?.let { character ->
+                CharacterCard(
+                    character = character,
+                    modifier = Modifier.maskClip(
+                        shape = MaterialTheme.shapes.large
+                    ),
+                    onClick = {
+                        onCharacterClick(character)
+                    },
+                    sharedTransitionScope = sharedTransitionScope,
+                    animatedVisibilityScope = animatedVisibilityScope
+                )
+            }
+        }
+    }
+}
