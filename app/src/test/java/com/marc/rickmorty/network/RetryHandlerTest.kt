@@ -1,6 +1,6 @@
 package com.marc.rickmorty.network
 
-import com.marc.rickmorty.features.characters.data.network.executeRetryAfter
+import com.marc.rickmorty.core.network.executeRetryAfter
 import io.mockk.every
 import io.mockk.mockk
 import junit.framework.TestCase.assertEquals

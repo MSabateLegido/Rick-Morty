@@ -22,8 +22,6 @@ fun CharacterDto.toDomain(): Character {
             "Genderless" -> Gender.GENDERLESS
             else -> Gender.UNKNOWN
         },
-        origin = origin.toDomain(),
-        location = location.toDomain(),
         image = image,
         episodes = episode
     )
