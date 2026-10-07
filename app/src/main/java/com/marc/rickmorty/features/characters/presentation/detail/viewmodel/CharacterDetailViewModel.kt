@@ -2,7 +2,7 @@ package com.marc.rickmorty.features.characters.presentation.detail.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.marc.rickmorty.features.characters.domain.usecase.GetCharacterByIdUseCase
+import com.marc.rickmorty.features.characters.domain.usecase.GetCharacterWithEpisodesUseCase
 import com.marc.rickmorty.features.characters.presentation.detail.ui.CharacterDetailUiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -14,7 +14,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class CharacterDetailViewModel @Inject constructor(
-    private val getCharacterByIdUseCase: GetCharacterByIdUseCase
+    private val getCharacterWithEpisodesUseCase: GetCharacterWithEpisodesUseCase
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow(CharacterDetailUiState())
@@ -29,12 +29,12 @@ class CharacterDetailViewModel @Inject constructor(
                 )
             }
             try {
-                val character = getCharacterByIdUseCase(characterId)
+                val characterWithEpisode = getCharacterWithEpisodesUseCase(characterId)
                 _uiState.update {
                     it.copy(
                         isLoading = false,
                         error = null,
-                        character = character
+                        characterWithEpisode = characterWithEpisode
                     )
                 }
             } catch (e: Exception) {
@@ -42,7 +42,7 @@ class CharacterDetailViewModel @Inject constructor(
                     it.copy(
                         isLoading = false,
                         error = e.message,
-                        character = null
+                        characterWithEpisode = null
                     )
                 }
             }

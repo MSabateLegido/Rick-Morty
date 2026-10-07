@@ -25,6 +25,6 @@ fun CharacterDto.toDomain(): Character {
         origin = origin.toDomain(),
         location = location.toDomain(),
         image = image,
-        episode = episode
+        episodes = episode
     )
 }

@@ -11,7 +11,7 @@ data class Character(
     val origin: CharacterLocation,
     val location: CharacterLocation,
     val image: String,
-    val episode: List<String>
+    val episodes: List<String>
 )
 
 enum class Gender(val value: String) {
