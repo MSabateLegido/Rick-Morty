@@ -23,18 +23,34 @@ class EpisodeRepositoryImpl @Inject constructor(
         val missingIds = ids.filterNot { it in cachedIds }
 
         val fetchedEpisodes = if (missingIds.isNotEmpty()) {
-            val episodeIds = missingIds.joinToString(",")
+            if (missingIds.size == 1) {
+                val episodeDto = episodeApi.getEpisode(missingIds.first())
 
-            episodeApi.getEpisodes(episodeIds).map { episodeDto ->
-                Episode(
-                    id = episodeDto.id,
-                    name = episodeDto.name,
-                    airDate = episodeDto.airDate,
-                    episode = episodeDto.episode,
-                    characters = episodeDto.characters,
-                    url = episodeDto.url,
-                    created = episodeDto.created
+                listOf(
+                    Episode(
+                        id = episodeDto.id,
+                        name = episodeDto.name,
+                        airDate = episodeDto.airDate,
+                        episode = episodeDto.episode,
+                        characters = episodeDto.characters,
+                        url = episodeDto.url,
+                        created = episodeDto.created
+                    )
                 )
+            } else {
+                val episodeIds = missingIds.joinToString(",")
+
+                episodeApi.getEpisodes(episodeIds).map { episodeDto ->
+                    Episode(
+                        id = episodeDto.id,
+                        name = episodeDto.name,
+                        airDate = episodeDto.airDate,
+                        episode = episodeDto.episode,
+                        characters = episodeDto.characters,
+                        url = episodeDto.url,
+                        created = episodeDto.created
+                    )
+                }
             }.also { episodes ->
                 episodeCacheMutex.withLock {
                     episodes.forEach { episode ->
@@ -46,7 +62,8 @@ class EpisodeRepositoryImpl @Inject constructor(
             emptyList()
         }
 
-        val episodesById = (cachedEpisodes + fetchedEpisodes).associateBy { it.id }
+        val episodesById = (cachedEpisodes + fetchedEpisodes)
+            .associateBy { it.id }
 
         return ids.mapNotNull { episodesById[it] }
     }

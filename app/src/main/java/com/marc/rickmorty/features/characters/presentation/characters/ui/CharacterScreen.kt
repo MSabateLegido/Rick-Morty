@@ -15,10 +15,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.paging.LoadState
 import androidx.paging.compose.collectAsLazyPagingItems
+import com.marc.rickmorty.R
 import com.marc.rickmorty.core.ui.components.ErrorScreen
 import com.marc.rickmorty.core.ui.components.LoadingScreen
 import com.marc.rickmorty.core.ui.components.NoResultsScreen
@@ -84,6 +86,7 @@ fun CharacterScreen(
                     is LoadState.Error -> {
                         ErrorScreen(
                             modifier = Modifier.fillMaxSize(),
+                            description = stringResource(R.string.character_error_screen_description),
                             onRetry = characters::retry
                         )
                     }

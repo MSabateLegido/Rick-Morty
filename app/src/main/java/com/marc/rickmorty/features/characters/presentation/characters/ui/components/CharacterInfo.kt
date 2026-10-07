@@ -57,7 +57,8 @@ fun BoxScope.CharacterInfo(
         Text(
             text = character.species,
             style = MaterialTheme.typography.bodyMedium,
-            color = Color.White.copy(alpha = 0.85f)
+            color = Color.White.copy(alpha = 0.85f),
+            fontFamily = Outfit
         )
     }
 }

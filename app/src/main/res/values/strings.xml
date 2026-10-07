@@ -1,8 +1,14 @@
 <resources>
     <string name="app_name">Rick&amp;Morty</string>
     <string name="character_top_app_bar_title">Rick &amp; Morty</string>
-    <string name="error_screen_title">Something went wrong</string>
-    <string name="error_screen_description">We couldn\'t load the characters. Please try again.</string>
+    <string name="default_error_screen_title">Something went wrong</string>
+    <string name="default_error_screen_description">An unexpected error occurred. Please try again.</string>
+    <string name="character_error_screen_title">Couldn\'t load characters</string>
+    <string name="character_error_screen_description">We couldn\'t load the characters. Please try again.</string>
+    <string name="character_detail_error_screen_title">Couldn\'t load character</string>
+    <string name="character_detail_error_screen_description">We couldn\'t load this character. Please try again.</string>
+    <string name="episode_error_screen_title">Couldn\'t load episodes</string>
+    <string name="episode_error_screen_description">We couldn\'t load the episodes for this character. Please try again.</string>
     <string name="no_results_screen_title">No results</string>
     <string name="no_results_screen_description">No characters match the filters you applied.</string>
     <string name="character_filter_screen_reset_filters_button">Reset filters</string>
@@ -17,4 +23,7 @@
     <string name="character_gender_label">Gender</string>
     <string name="character_filters_dropdown_all_tag">All</string>
     <string name="character_top_app_bar_filters_content_description">Filters</string>
+    <string name="episodes_header_title">Episodes</string>
+    <string name="episodes_header_appears_in">Appears in</string>
+    <string name="episodes_header_episodes">episodes</string>
 </resources>
