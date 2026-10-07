@@ -5,11 +5,14 @@ import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.marc.rickmorty.features.characters.data.datasource.CharacterApi
 import com.marc.rickmorty.features.characters.data.model.CharacterDto
+import com.marc.rickmorty.features.characters.data.model.CharacterLocationDto
 import com.marc.rickmorty.features.characters.data.model.CharacterResponseDto
 import com.marc.rickmorty.features.characters.data.model.InfoDto
 import com.marc.rickmorty.features.characters.data.paging.CharacterPagingSource
+import com.marc.rickmorty.features.characters.domain.model.CharacterFilters
 import io.mockk.coEvery
 import io.mockk.mockk
+import junit.framework.TestCase.assertEquals
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.test.runTest
 import okhttp3.ResponseBody.Companion.toResponseBody
@@ -29,17 +32,21 @@ class CharacterPagingSourceTest {
             status = "",
             species = "",
             type = "",
-            image = ""
-        ),
-        CharacterDto(
-            id = 2,
-            name = "Morty Smith",
-            status = "",
-            species = "",
-            type = "",
-            image = ""
+            gender = "",
+            origin = CharacterLocationDto(
+                name = "",
+                url = ""
+            ),
+            location = CharacterLocationDto(
+                name = "",
+                url = ""
+            ),
+            image = "",
+            episode = listOf()
         )
     )
+
+    private val filters = CharacterFilters()
 
     @Test
     fun `load returns page with characters and correct keys`() = runTest {
@@ -56,7 +63,7 @@ class CharacterPagingSourceTest {
             results = characters
         )
 
-        val pagingSource = CharacterPagingSource(api)
+        val pagingSource = CharacterPagingSource(api, filters)
 
         val result = pagingSource.load(
             PagingSource.LoadParams.Refresh(
@@ -66,7 +73,7 @@ class CharacterPagingSourceTest {
             )
         )
 
-        Assert.assertEquals(
+        assertEquals(
             PagingSource.LoadResult.Page(
                 data = characters,
                 prevKey = null,
@@ -91,7 +98,7 @@ class CharacterPagingSourceTest {
             results = characters
         )
 
-        val pagingSource = CharacterPagingSource(api)
+        val pagingSource = CharacterPagingSource(api, filters)
 
         val result = pagingSource.load(
             PagingSource.LoadParams.Refresh(
@@ -101,7 +108,7 @@ class CharacterPagingSourceTest {
             )
         )
 
-        Assert.assertEquals(
+        assertEquals(
             PagingSource.LoadResult.Page(
                 data = characters,
                 prevKey = 1,
@@ -126,7 +133,7 @@ class CharacterPagingSourceTest {
             results = characters
         )
 
-        val pagingSource = CharacterPagingSource(api)
+        val pagingSource = CharacterPagingSource(api, filters)
 
         val result = pagingSource.load(
             PagingSource.LoadParams.Refresh(
@@ -136,7 +143,7 @@ class CharacterPagingSourceTest {
             )
         )
 
-        Assert.assertEquals(
+        assertEquals(
             PagingSource.LoadResult.Page(
                 data = characters,
                 prevKey = 2,
@@ -159,7 +166,7 @@ class CharacterPagingSourceTest {
             api.getCharacters(1)
         } throws exception
 
-        val pagingSource = CharacterPagingSource(api)
+        val pagingSource = CharacterPagingSource(api, filters)
 
         val result = pagingSource.load(
             PagingSource.LoadParams.Refresh(
@@ -169,7 +176,7 @@ class CharacterPagingSourceTest {
             )
         )
 
-        Assert.assertEquals(
+        assertEquals(
             PagingSource.LoadResult.Error<Int, CharacterDto>(exception),
             result
         )
@@ -183,7 +190,7 @@ class CharacterPagingSourceTest {
             api.getCharacters(1)
         } throws exception
 
-        val pagingSource = CharacterPagingSource(api)
+        val pagingSource = CharacterPagingSource(api, filters)
 
         val result = pagingSource.load(
             PagingSource.LoadParams.Refresh(
@@ -193,7 +200,7 @@ class CharacterPagingSourceTest {
             )
         )
 
-        Assert.assertEquals(
+        assertEquals(
             PagingSource.LoadResult.Error<Int, CharacterDto>(exception),
             result
         )
@@ -207,7 +214,7 @@ class CharacterPagingSourceTest {
             api.getCharacters(1)
         } throws exception
 
-        val pagingSource = CharacterPagingSource(api)
+        val pagingSource = CharacterPagingSource(api, filters)
 
         val thrown = Assert.assertThrows(CancellationException::class.java) {
             runBlocking {
@@ -221,12 +228,12 @@ class CharacterPagingSourceTest {
             }
         }
 
-        Assert.assertEquals(exception, thrown)
+        assertEquals(exception, thrown)
     }
 
     @Test
     fun `getRefreshKey returns next page after previous key`() {
-        val pagingSource = CharacterPagingSource(api)
+        val pagingSource = CharacterPagingSource(api, filters)
 
         val state = PagingState(
             pages = listOf(
@@ -243,6 +250,6 @@ class CharacterPagingSourceTest {
 
         val result = pagingSource.getRefreshKey(state)
 
-        Assert.assertEquals(2, result)
+        assertEquals(2, result)
     }
 }
