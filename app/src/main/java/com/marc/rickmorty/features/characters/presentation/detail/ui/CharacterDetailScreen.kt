@@ -9,8 +9,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.marc.rickmorty.R
+import com.marc.rickmorty.core.common.ResourceState
 import com.marc.rickmorty.core.ui.components.ErrorScreen
 import com.marc.rickmorty.core.ui.components.LoadingScreen
 import com.marc.rickmorty.core.ui.theme.spacing
@@ -28,32 +31,33 @@ fun CharacterDetailScreen(
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
     LaunchedEffect(characterId) {
-        viewModel.loadCharacter(characterId)
+        viewModel.load(characterId)
     }
 
-    val characterWithEpisode = uiState.characterWithEpisode
-    when  {
-        uiState.isLoading -> {
+    when  (val characterState = uiState.character) {
+        is ResourceState.Loading -> {
             LoadingScreen(
                 modifier = Modifier
                     .fillMaxSize(),
                 size = MaterialTheme.spacing.huge
             )
         }
-
-        uiState.error != null -> {
-            ErrorScreen(
+        is ResourceState.Error -> {
+                ErrorScreen(
                 modifier = Modifier.fillMaxSize(),
-                onRetry = { viewModel.loadCharacter(characterId) }
+                description = stringResource(R.string.character_detail_error_screen_description),
+                onRetry = { viewModel.load(characterId) }
             )
         }
-
-        characterWithEpisode != null -> {
+        is ResourceState.Success -> {
             CharacterDetail(
-                characterWithEpisode = characterWithEpisode,
+                character = characterState.data,
+                episodes = uiState.episodes,
+                onRetryEpisodes = viewModel::retryEpisodes,
                 sharedTransitionScope = sharedTransitionScope,
                 animatedVisibilityScope = animatedVisibilityScope
             )
         }
+
     }
 }
