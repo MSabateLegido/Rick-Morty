@@ -1,5 +1,6 @@
 package com.marc.rickmorty.features.characters.presentation.detail.ui
 
+import android.util.Log
 import androidx.compose.animation.AnimatedVisibilityScope
 import androidx.compose.animation.ExperimentalSharedTransitionApi
 import androidx.compose.animation.SharedTransitionScope
@@ -31,7 +32,7 @@ fun CharacterDetailScreen(
         viewModel.loadCharacter(characterId)
     }
 
-    val character = uiState.character
+    val characterWithEpisode = uiState.characterWithEpisode
     when  {
         uiState.isLoading -> {
             LoadingScreen(
@@ -48,9 +49,9 @@ fun CharacterDetailScreen(
             )
         }
 
-        character != null -> {
+        characterWithEpisode != null -> {
             CharacterDetailImage(
-                character = character,
+                character = characterWithEpisode.character,
                 sharedTransitionScope = sharedTransitionScope,
                 animatedVisibilityScope = animatedVisibilityScope
             )
