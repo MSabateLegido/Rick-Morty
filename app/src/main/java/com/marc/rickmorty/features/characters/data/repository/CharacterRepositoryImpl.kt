@@ -1,5 +1,6 @@
 package com.marc.rickmorty.features.characters.data.repository
 
+import android.util.Log
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
@@ -13,11 +14,16 @@ import com.marc.rickmorty.features.characters.domain.model.CharacterFilters
 import com.marc.rickmorty.features.characters.domain.repository.CharacterRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.sync.Mutex
+import kotlinx.coroutines.sync.withLock
 import javax.inject.Inject
 
 class CharacterRepositoryImpl @Inject constructor(
     private val characterApi: CharacterApi
 ) : CharacterRepository {
+
+    private val characterCache = mutableMapOf<Int, Character>()
+    private val characterCacheMutex = Mutex()
 
     override fun getCharacters(
         filters: CharacterFilters
@@ -34,16 +40,36 @@ class CharacterRepositoryImpl @Inject constructor(
             }
         ).flow.map { pagingData ->
             pagingData.map { characterDto ->
-                characterDto.toDomain()
+                val character = characterDto.toDomain()
+
+                characterCacheMutex.withLock {
+                    characterCache[character.id] = character
+                }
+
+                character
             }
         }
     }
 
     override suspend fun getCharacterById(characterId: Int): Character {
-        return executeRetryAfter {
+        val cachedCharacter = characterCacheMutex.withLock {
+            characterCache[characterId]
+        }
+
+        if (cachedCharacter != null) {
+            return cachedCharacter
+        }
+
+        val character = executeRetryAfter {
             characterApi
                 .getCharacterById(characterId)
                 .toDomain()
         }
+
+        characterCacheMutex.withLock {
+            characterCache[character.id] = character
+        }
+
+        return character
     }
 }
