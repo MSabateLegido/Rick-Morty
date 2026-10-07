@@ -1,6 +1,5 @@
 package com.marc.rickmorty.features.characters.presentation.detail.ui
 
-import android.util.Log
 import androidx.compose.animation.AnimatedVisibilityScope
 import androidx.compose.animation.ExperimentalSharedTransitionApi
 import androidx.compose.animation.SharedTransitionScope
@@ -15,7 +14,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.marc.rickmorty.core.ui.components.ErrorScreen
 import com.marc.rickmorty.core.ui.components.LoadingScreen
 import com.marc.rickmorty.core.ui.theme.spacing
-import com.marc.rickmorty.features.characters.presentation.detail.ui.components.CharacterDetailImage
+import com.marc.rickmorty.features.characters.presentation.detail.ui.components.CharacterDetail
 import com.marc.rickmorty.features.characters.presentation.detail.viewmodel.CharacterDetailViewModel
 
 @OptIn(ExperimentalSharedTransitionApi::class)
@@ -50,8 +49,8 @@ fun CharacterDetailScreen(
         }
 
         characterWithEpisode != null -> {
-            CharacterDetailImage(
-                character = characterWithEpisode.character,
+            CharacterDetail(
+                characterWithEpisode = characterWithEpisode,
                 sharedTransitionScope = sharedTransitionScope,
                 animatedVisibilityScope = animatedVisibilityScope
             )
