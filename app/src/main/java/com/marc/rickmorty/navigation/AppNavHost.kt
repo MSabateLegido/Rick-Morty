@@ -41,6 +41,7 @@ fun AppNavHost(
 
                 CharacterDetailScreen(
                     characterId = route.characterId,
+                    onBack = { navController.popBackStack() },
                     sharedTransitionScope = this@SharedTransitionLayout,
                     animatedVisibilityScope = this
                 )

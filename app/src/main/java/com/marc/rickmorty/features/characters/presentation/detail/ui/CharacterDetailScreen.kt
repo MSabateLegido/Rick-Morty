@@ -25,6 +25,7 @@ import com.marc.rickmorty.features.characters.presentation.detail.viewmodel.Char
 fun CharacterDetailScreen(
     characterId: Int,
     viewModel: CharacterDetailViewModel = hiltViewModel(),
+    onBack: () -> Unit,
     sharedTransitionScope: SharedTransitionScope,
     animatedVisibilityScope: AnimatedVisibilityScope
 ) {
@@ -43,7 +44,7 @@ fun CharacterDetailScreen(
             )
         }
         is ResourceState.Error -> {
-                ErrorScreen(
+            ErrorScreen(
                 modifier = Modifier.fillMaxSize(),
                 description = stringResource(R.string.character_detail_error_screen_description),
                 onRetry = { viewModel.load(characterId) }
@@ -53,6 +54,7 @@ fun CharacterDetailScreen(
             CharacterDetail(
                 character = characterState.data,
                 episodes = uiState.episodes,
+                onBack = onBack,
                 onRetryEpisodes = viewModel::retryEpisodes,
                 sharedTransitionScope = sharedTransitionScope,
                 animatedVisibilityScope = animatedVisibilityScope
